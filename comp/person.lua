@@ -16,7 +16,9 @@ function person:collisionDetected(col)
 			if phys.vx < 0 then dir = -1 end
 			
 			phys = self.parent:getComponent("physics")
-			local corpse = self.parent.game:addEnt(corpse, {x=phys.x-phys.w/2, y=phys.y+10})
+			local r = 100; local g = 50; local b = 50
+			if self.friendly then r = 50; g = 50; b = 100 end
+			local corpse = self.parent.game:addEnt(corpse, {x=phys.x-phys.w/2, y=phys.y+10, r=r, g=g, b=b})
 			corpse:getComponent("physics"):setVel(250*dir, -50)
 		end
 	end

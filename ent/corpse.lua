@@ -9,7 +9,7 @@ function corpse:initialize(args)
   
 	local phys = physics:new({parent=self, x=x, y=y, w=100, h=50, gravity=true, friction=true})
 
-	local rect = rectangle:new({parent=self, posParent=phys, w=100, h=50, r=100, g=50, b=50})
+	local rect = rectangle:new({parent=self, posParent=phys, w=100, h=50, r=args.r, g=args.g, b=args.b})
 		
 	self:addComponent(phys)
 	self:addComponent(rect)
