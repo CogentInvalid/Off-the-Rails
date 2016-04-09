@@ -39,11 +39,11 @@ function game:init()
 	
 	self.drawLayers = {"background", "default", "player"}
   
-  bg_image = love.graphics.newImage("res/img/nightSky.jpg")
-  bg_image:setWrap("repeat", "repeat")
-
-  -- note how the Quad's width and height are larger than the image width and height.
-  bg_quad = love.graphics.newQuad(0, 0, 2600, 1700, bg_image:getWidth(), bg_image:getHeight())
+	self.bg_image = love.graphics.newImage("res/img/nightSky.jpg")
+	self.bgX1 = 0
+	self.bgY1 = 0
+	self.bgX2 = 2560
+	self.bgY2 = 0
 
 	--systems
 	self.system = {}
@@ -134,6 +134,11 @@ function game:update(delta)
 	if self.paused == false then accum = accum + delta end
 	if accum > 0.05 then accum = 0.05 end
 	while accum >= dt do
+		
+		self.bgX1 = self.bgX1 - 100*dt
+		if self.bgX1 < -2560 then self.bgX1 = self.bgX1 + 2560*2 end
+		self.bgX2 = self.bgX2 - 100*dt
+		if self.bgX2 < -2560 then self.bgX2 = self.bgX2 + 2560*2 end
 
 		--reverse iterate entities
 		for i, entity in lume.ripairs(self.ent) do
@@ -160,7 +165,8 @@ end
 function game:draw()
   
   love.graphics.setColor(255,255,255)
-  love.graphics.draw(bg_image, bg_quad, 0, 0)
+  love.graphics.draw(self.bg_image, self.bgX1, self.bgY1)
+	love.graphics.draw(self.bg_image, self.bgX2, self.bgY2)  
 
 	--attach camera
 	self.camMan.cam:attach()
