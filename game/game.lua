@@ -11,7 +11,10 @@ require "ent/player"
 require "ent/wall"
 require "ent/enemy"
 require "ent/bullet"
+
 require "ent/instructions"
+require "ent/weapon"
+
 
 require "comp/image"
 require "comp/rectangle"
@@ -38,9 +41,13 @@ function game:init()
 
 	--entities
 	self.ent = {}
+
 	self.player = self:addEnt(player, {x=-100, y=100})
 	
 	self:addEnt(enemy, {x=100, y=0, w=500, h=50})
+
+  self:addEnt(weapon, {x=50, y=100})
+
 	
 	self:addEnt(instructions, {x=0, y=-100, text="Hello world!"})
 	
