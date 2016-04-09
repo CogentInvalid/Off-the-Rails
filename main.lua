@@ -27,7 +27,7 @@ function love.load()
 	math.randomseed(os.time())
 	
 	--TODO remove
-	courierCodeBold = love.graphics.newFont("/res/font/CourierCode-bold.ttf", 24)
+	courierCodeBold = love.graphics.newFont("/res/font/CourierCode-bold.ttf", 20)
 	love.graphics.setFont(courierCodeBold)
 
 	imgMan = imgManager:new() --tood: mayb remvov, replace to with cargo or love-loader
