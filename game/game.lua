@@ -59,18 +59,26 @@ function game:init()
   self.player = self:addEnt(player, {x=0, y=100}, true)
   
 	self.trainCars = {}
+  
   self.trainCars[1] = trainCar:new()
   self.trainCars[2] = trainCar:new()
+  self.trainCars[3] = trainCar:new()
+  
   self.trainCars[1].ents = {
     {class = instructions, args={x=100, y=-200, text="Your date is waiting on you. Dinner will be served.\nEventually.\nUse the arrow keys to move yourself already"}}
-    }
+  }
+  
   self.trainCars[2].ents = {
     {class = instructions, args={x=100, y=-50, text="Pick up the weapon"}}
   }
+  
+  self.trainCars[3].ents = {
+    {class = instructions, args={x=100, y=-200, text="Kill it. Kill it.\n It can't stay between you and your date."}},
+    {class = enemy, args = {x=600, y=50, w=500, h=50}}
+  }
 	
 	self.levMan:startLevel()
-	
-	self:addEnt(enemy, {x=600, y=50, w=500, h=50})
+  
 	--self:addEnt(weapon, {x=150, y=100})
 	--self:addEnt(instructions, {x=100, y=-50, text="Hello world!"})
 	

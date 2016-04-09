@@ -97,7 +97,7 @@ function physics:addPos(x,y)
 	self.y = self.y + y
 end
 
-function physics:offset(x,y)
+function physics:offset(args)
 	self.x = self.x + args.x
 	self.y = self.y + args.y
 end
