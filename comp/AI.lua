@@ -5,13 +5,16 @@ function Ai:initialize(args)
   self.type = "Ai"
   self.target = args.target
   self.phys = self.parent:getComponent("physics")
-	self.shootTimer = 1
+	self.shootTimer = 1.5
 	
 	self.actions = {["walkForward"]=1, ["shoot"]=2, ["dodge"]=1}
-	self.currentAction = "shoot"
+	self.currentAction = lume.weightedchoice(self.actions)
 	self.actionTimer = 2
 	
 	self.active = false
+	self.dodging = false
+	
+	self[self.currentAction](self, true)
 	
 end
 
@@ -23,6 +26,15 @@ function Ai:update(dt)
 			self.currentAction = lume.weightedchoice(self.actions)
 			self[self.currentAction](self, true)
 		end
+	end
+	if not self.dodging then
+		self.phys.inBackground = false
+		local rect = self.parent:getComponent("rectangle")
+		local fadeSpeed = 20
+		rect.r = rect.r - (rect.r - 200)*fadeSpeed*dt
+		rect.g = rect.g - (rect.g - 50)*fadeSpeed*dt
+		rect.b = rect.b - (rect.b - 50)*fadeSpeed*dt
+		rect.drawLayer = "default"
 	end
 	self.phys:addVel(-(self.phys.vx)*3*dt, 0)
 end
@@ -36,7 +48,8 @@ function Ai:shoot(start)
 	if self:targetVisible() then
 		self.shootTimer = self.shootTimer - dt
 		if self.shootTimer <= 0 then
-			self.shootTimer = 1
+			self.shootTimer = 1.5
+			if math.random(6) == 1 then self.shootTimer = 0.3 end
 			self:shootPlayer()
 		end
 	end
@@ -52,7 +65,26 @@ function Ai:walkForward(start)
 end
 
 function Ai:dodge(start)
-	if start then self.actionTimer = 2 end
+	if start then
+		self.actionTimer = math.random()*3+2 --TODO randomize
+		self.dodgeTimer = self.actionTimer - 1
+		self.dodging = true
+	end
+	
+	if self.dodging then
+		self.phys.inBackground = true
+		local rect = self.parent:getComponent("rectangle")
+		local fadeSpeed = 20
+		rect.r = rect.r - (rect.r - 80)*fadeSpeed*dt
+		rect.g = rect.g - (rect.g - 40)*fadeSpeed*dt
+		rect.b = rect.b - (rect.b - 40)*fadeSpeed*dt
+		rect.drawLayer = "background"
+	end
+	
+	self.dodgeTimer = self.dodgeTimer - dt
+	if self.dodgeTimer <= 0 then
+		self.dodging = false
+	end
 end
 
 function Ai:shootPlayer()
