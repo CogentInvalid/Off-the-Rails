@@ -79,7 +79,7 @@ function game:init()
   }
   
   self.trainCars[3].ents = {
-    {class = instructions, args={x=100, y=-200, text="Kill it. Kill it.\nIt can't stay between you and your date."}},
+    {class = instructions, args={x=100, y=-200, text="Kill it. Kill it.\nIt can't stay between you and your date.\nPress X to kill"}},
     {class = enemy, args = {x=600, y=50, w=500, h=50}}
   }
   
@@ -89,7 +89,7 @@ function game:init()
   }
   
   self.trainCars[5].ents = {
-    {class = instructions, args={x=100, y=-200, text="See I told you..."}}
+    {class = instructions, args={x=100, y=-200, text="See I told you...\nPress and hold Arrow Up to dodge QUICKLY!", delay=3}}
   }
   
   self.trainCars[6].ents = {
