@@ -8,6 +8,8 @@ function platformerController:initialize(args)
 	
 	self.jumpForce = args.jumpForce or 300
 	
+	self.dir = 1 --facing left or right
+	
 	self.phys = self.parent:getComponent("physics")
 end
 
@@ -25,8 +27,10 @@ function platformerController:update(dt)
 	
 	if input:keyDown("left") then
 		phys:addVel(-(phys.vx+self.speed)*5*dt, 0)
+		self.dir = -1
 	elseif input:keyDown("right") then
 		phys:addVel(-(phys.vx-self.speed)*5*dt, 0)
+		self.dir = 1
 	else
 		phys:addVel(-phys.vx*5*dt, 0)
 	end
@@ -46,6 +50,10 @@ function platformerController:jump()
 	if self.phys.onGround then self.phys.vy = -self.jumpForce end
 end
 
+function platformerController:shoot()
+	self.parent.game:addEnt(bullet, {x=self.phys.x+self.phys.w/2, y=self.phys.y+self.phys.h/2, dir=self.dir})
+end
+
 function platformerController:sideHit(args)
 	if args.side == "up" then
 		self.airControl = true
@@ -53,11 +61,4 @@ function platformerController:sideHit(args)
 end
 
 function platformerController:collisionDetected(col)
-	if col.other.parent.id == "pounder" and col.side == "in" then
-		self.phys.vx = self.phys.vx/2
-		self.phys.vy = self.phys.vy/2
-	end
-	if col.other.parent:getComponent("gelTile") ~= nil then
-		self.vy = -self.jumpForce
-	end
 end

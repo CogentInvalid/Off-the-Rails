@@ -6,11 +6,13 @@ function inputManager:initialize(parent)
 	self.bind = {
 		z = "jump", up = "jump", w = "jump", space = "jump",
 		left = "left", a = "left",
-		right = "right", d = "right"
+		right = "right", d = "right",
+		x = "shoot"
 	}
 	
 	self.map = {
-		jump = self.jump
+		jump = self.jump,
+		shoot = self.shoot
 	}
 	
 end
@@ -32,6 +34,12 @@ function inputManager:jump()
 	local player = self.game.player
 	local controller = player:getComponent("platformerController")
 	if controller ~= nil then controller:jump() end
+end
+
+function inputManager:shoot()
+	local player = self.game.player
+	local controller = player:getComponent("platformerController")
+	if controller ~= nil then controller:shoot() end
 end
 
 --returns true if any of the keys for a particular bind are pressed.

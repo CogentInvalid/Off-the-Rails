@@ -8,6 +8,7 @@ require "comp/component"
 
 require "ent/player"
 require "ent/wall"
+require "ent/bullet"
 
 require "comp/image"
 require "comp/rectangle"
@@ -29,14 +30,14 @@ function game:init()
 	self.colMan = self:addSystem(collisionManager)
 	self.camMan = self:addSystem(cameraManager)
 	self.inputMan = self:addSystem(inputManager)
-	
-	--self.camMan:setPos()
 
 	--entities
 	self.ent = {}
 	self.player = self:addEnt(player, {x=0, y=100})
 	
 	self:addEnt(wall, {x=-250, y=200, w=500, h=50})
+	
+	self.camMan:setTarget(self.player:getComponent("physics"), 0, 0)
 
 end
 
