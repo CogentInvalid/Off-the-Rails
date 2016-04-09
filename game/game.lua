@@ -11,10 +11,10 @@ require "ent/player"
 require "ent/wall"
 require "ent/enemy"
 require "ent/bullet"
-
 require "ent/instructions"
 require "ent/weapon"
-
+require "ent/corpse"
+require "ent/trigger"
 
 require "comp/image"
 require "comp/rectangle"
@@ -22,6 +22,7 @@ require "comp/physics"
 require "comp/topDownController"
 require "comp/platformerController"
 require "comp/text"
+require "comp/person"
 
 local game = {}
 
@@ -42,14 +43,13 @@ function game:init()
 	--entities
 	self.ent = {}
 
-	self.player = self:addEnt(player, {x=-100, y=100})
+	self.player = self:addEnt(player, {x=000, y=100})
 	
-	self:addEnt(enemy, {x=100, y=0, w=500, h=50})
+	self:addEnt(enemy, {x=200, y=0, w=500, h=50})
 
-  self:addEnt(weapon, {x=50, y=100})
+	self:addEnt(weapon, {x=150, y=100})
 
-	
-	self:addEnt(instructions, {x=0, y=-100, text="Hello world!"})
+	self:addEnt(instructions, {x=100, y=-50, text="Hello world!"})
 	
 	self.camMan:setTarget(self.player:getComponent("physics"), 0, 0)
 	self.camMan.lockY = true
@@ -78,7 +78,7 @@ function game:update(delta)
 
 			--if die then is kill
 			if entity.die then
-				table.remove(self.ent, 1)
+				table.remove(self.ent, i)
 			end
 		end
 
@@ -122,6 +122,7 @@ end
 
 function game:keypressed(key)
 	self.inputMan:keypressed(key)
+	if key == "q" then crash(inspect(self.player.die)) end
 end
 
 function game:mousepressed(button)
