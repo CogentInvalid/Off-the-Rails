@@ -196,12 +196,14 @@ end
 
 function game:draw()
   
-  love.graphics.setColor(255,255,255)
+  love.graphics.setColor(255,255,255)  
+
   love.graphics.draw(self.bg_image, self.bgX1, self.bgY1)
 	love.graphics.draw(self.bg_image, self.bgX2, self.bgY2)  
 
 	--attach camera
 	self.camMan.cam:attach()
+
 
 	--draw world
 	for q, layer in ipairs(self.drawLayers) do
