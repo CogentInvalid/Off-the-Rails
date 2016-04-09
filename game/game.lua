@@ -38,6 +38,12 @@ function game:init()
 	self.paused = false
 	
 	self.drawLayers = {"background", "default", "player"}
+  
+  bg_image = love.graphics.newImage("res/img/nightSky.jpg")
+  bg_image:setWrap("repeat", "repeat")
+
+  -- note how the Quad's width and height are larger than the image width and height.
+  bg_quad = love.graphics.newQuad(0, 0, 2600, 1700, bg_image:getWidth(), bg_image:getHeight())
 
 	--systems
 	self.system = {}
@@ -111,6 +117,9 @@ function game:update(delta)
 end
 
 function game:draw()
+  
+  love.graphics.setColor(255,255,255)
+  love.graphics.draw(bg_image, bg_quad, 0, 0)
 
 	--attach camera
 	self.camMan.cam:attach()

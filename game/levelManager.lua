@@ -13,6 +13,7 @@ end
 
 function levelManager:startLevel()
 	self:loadTrainCar()
+  
 end
 
 function levelManager:loadTrainCar()
