@@ -24,6 +24,7 @@ function platformerController:update(dt)
 
 	--x-movement
 	local speed = self.speed
+	if self.ducking then speed = speed / 4 end
 	
 	if input:keyDown("left") then
 		phys:addVel(-(phys.vx+speed)*5*dt, 0)
