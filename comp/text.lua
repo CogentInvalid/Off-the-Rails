@@ -6,6 +6,12 @@ function text:initialize(args)
 	self.text = args.text
 	self.x = args.x
 	self.y = args.y
+	self.drawLayer = "default"
+end
+
+function text:offset(args)
+	self.x = self.x + args.x
+	self.y = self.y + args.y
 end
 
 

@@ -52,15 +52,13 @@ function game:init()
   
   self.player = self:addEnt(player, {x=0, y=100}, true)
   
-  self.car1 = trainCar:new()
-  self.car2 = trainCar:new()
-  
-  
-  self.car1.ents = {
+	self.trainCars = {}
+  self.trainCars[1] = trainCar:new()
+  self.trainCars[2] = trainCar:new()
+  self.trainCars[1].ents = {
     {class = instructions, args={x=100, y=-50, text="Your date is waiting on you. Dinner will be served. Eventually. Use the arrows keys to move yourself already"}}
     }
-  
-  self.car2.ents = {
+  self.trainCars[2].ents = {
     {class = instructions, args={x=100, y=-50, text="Pick up the weapon"}}
   }
 	
@@ -68,7 +66,7 @@ function game:init()
 	
 	self:addEnt(enemy, {x=200, y=0, w=500, h=50})
 	self:addEnt(weapon, {x=150, y=100})
-	self:addEnt(instructions, {x=100, y=-50, text="Hello world!"})
+	--self:addEnt(instructions, {x=100, y=-50, text="Hello world!"})
 	
 	self.camMan:setTarget(self.player:getComponent("physics"), 0, 0)
 	--self.camMan.lockY = true
@@ -148,7 +146,6 @@ end
 
 function game:keypressed(key)
 	self.inputMan:keypressed(key)
-	if key == "q" then crash(inspect(self.player.die)) end
 end
 
 function game:mousepressed(button)
