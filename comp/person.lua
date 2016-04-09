@@ -6,7 +6,7 @@ end
 
 function person:collisionDetected(col)
 	if col.other.parent.id == "bullet" then
-		if col.other.friendly ~= self.parent.friendly then
+		if col.other.parent.friendly ~= self.parent.friendly then
 			self.parent.die = true
 			col.other.parent.die = true
 			
