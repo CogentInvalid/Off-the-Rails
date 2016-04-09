@@ -11,11 +11,10 @@ require "ent/player"
 require "ent/wall"
 require "ent/enemy"
 require "ent/bullet"
-<<<<<<< Updated upstream
+
 require "ent/instructions"
-=======
 require "ent/weapon"
->>>>>>> Stashed changes
+
 
 require "comp/image"
 require "comp/rectangle"
@@ -42,14 +41,13 @@ function game:init()
 
 	--entities
 	self.ent = {}
-<<<<<<< Updated upstream
+
 	self.player = self:addEnt(player, {x=-100, y=100})
 	
 	self:addEnt(enemy, {x=100, y=0, w=500, h=50})
-=======
-	self.player = self:addEnt(player, {x=0, y=100})
+
   self:addEnt(weapon, {x=50, y=100})
->>>>>>> Stashed changes
+
 	
 	self:addEnt(wall, {x=-250, y=200, w=500, h=50})
 	
