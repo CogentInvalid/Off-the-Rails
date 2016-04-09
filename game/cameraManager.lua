@@ -3,7 +3,7 @@ local camera = require "libs/hump/camera"
 cameraManager = class("cameraManager")
 
 function cameraManager:initialize(parent)
-	self.cam = camera(100,100)
+	self.cam = camera(0,0)
 	self.target = nil
 	
 	self.x = self.cam.x; self.y = self.cam.y

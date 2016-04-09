@@ -10,6 +10,7 @@ require "ent/player"
 require "ent/wall"
 
 require "comp/image"
+require "comp/rectangle"
 require "comp/physics"
 require "comp/topDownController"
 require "comp/platformerController"
@@ -28,19 +29,14 @@ function game:init()
 	self.colMan = self:addSystem(collisionManager)
 	self.camMan = self:addSystem(cameraManager)
 	self.inputMan = self:addSystem(inputManager)
+	
+	--self.camMan:setPos()
 
 	--entities
 	self.ent = {}
-	self.player = self:addEnt(player, {x=500, y=0})
+	self.player = self:addEnt(player, {x=0, y=100})
 	
-	self:addEnt(wall, {x=450, y=300})
-	self:addEnt(wall, {x=500, y=300})
-	self:addEnt(wall, {x=550, y=300})
-	
-	--other stuff
-	local phys = self.player:getComponent("physics")
-	self.camMan:setTarget(phys, phys.w/2, phys.h/2)
-	self.camMan:setPos(phys.x+phys.w/2, phys.y+phys.h/2)
+	self:addEnt(wall, {x=-250, y=200, w=500, h=50})
 
 end
 
@@ -108,13 +104,6 @@ end
 
 function game:keypressed(key)
 	self.inputMan:keypressed(key)
-	if key=="q" then
-		self.debswap = not self.debswap
-		--if self.debswap then self.camMan:setTargetPos(200,200)
-		--	else self.camMan:setTarget(self.player:getComponent("physics")) end
-		if self.debswap then self.camMan:setTargetScale(0.842895730495872340958723409572304958723045)
-			else self.camMan:setTargetScale(2.092138410293759438752309857120398471023948) end
-	end
 end
 
 function game:mousepressed(button)

@@ -4,11 +4,9 @@ function platformerController:initialize(args)
 	component.initialize(self, args)
 	self.type = "platformerController"
 	
-	--TODO: actually use these
 	self.speed = args.speed or 200
-	self.friction = args.friction or 2
 	
-	self.jumpForce = args.jumpForce or 400
+	self.jumpForce = args.jumpForce or 300
 	
 	self.phys = self.parent:getComponent("physics")
 end
@@ -42,15 +40,11 @@ function platformerController:update(dt)
 	end
 	
 	--friction
-	--todo: maybe turn off friction if player's moving in same direction as input
 	if phys.onGround then
 		if phys.vx > 0 then phys.vx = phys.vx - (600*dt)
 		else if phys.vx < 0 then phys.vx = phys.vx + (600*dt) end end
 		if phys.vx > -(600*dt) and phys.vx < (600*dt) then phys.vx = 0 end
 	end
-	
-	--debug
-	--if keyDown("e") then self.phys.col = false else self.phys.col = true end
 	
 end
 
