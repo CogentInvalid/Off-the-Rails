@@ -51,7 +51,7 @@ function platformerController:jump()
 end
 
 function platformerController:shoot()
-	self.parent.game:addEnt(bullet, {x=self.phys.x+self.phys.w/2, y=self.phys.y+self.phys.h/2, dir=self.dir})
+	self.parent.game:addEnt(bullet, {x=self.phys.x+self.phys.w/2, y=self.phys.y+self.phys.h/2, dir=self.dir, friendly=true})
 end
 
 function platformerController:sideHit(args)

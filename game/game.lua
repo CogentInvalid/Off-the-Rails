@@ -1,6 +1,7 @@
 require "game/collisionManager"
 require "game/cameraManager"
 require "game/inputManager"
+require "game/levelManager"
 
 --TODO: load all components/entities automatically
 require "ent/gameObject"
@@ -8,13 +9,16 @@ require "comp/component"
 
 require "ent/player"
 require "ent/wall"
+require "ent/enemy"
 require "ent/bullet"
+require "ent/instructions"
 
 require "comp/image"
 require "comp/rectangle"
 require "comp/physics"
 require "comp/topDownController"
 require "comp/platformerController"
+require "comp/text"
 
 local game = {}
 
@@ -30,12 +34,17 @@ function game:init()
 	self.colMan = self:addSystem(collisionManager)
 	self.camMan = self:addSystem(cameraManager)
 	self.inputMan = self:addSystem(inputManager)
+	self.levMan = self:addSystem(levelManager)
 
 	--entities
 	self.ent = {}
-	self.player = self:addEnt(player, {x=0, y=100})
+	self.player = self:addEnt(player, {x=-100, y=100})
+	
+	self:addEnt(enemy, {x=100, y=0, w=500, h=50})
 	
 	self:addEnt(wall, {x=-250, y=200, w=500, h=50})
+	
+	self:addEnt(instructions, {x=0, y=-100, text="Hello world!"})
 	
 	self.camMan:setTarget(self.player:getComponent("physics"), 0, 0)
 

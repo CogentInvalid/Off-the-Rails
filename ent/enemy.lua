@@ -7,10 +7,10 @@ function enemy:initialize(args)
 	local x = args.x or 100
 	local y = args.y or 100
   
-	local phys = physics:new({parent=self, x=x, y=y, w=48, h=48, gravity=true})
+	local phys = physics:new({parent=self, x=x, y=y, w=50, h=100, gravity=true})
 
-	local img = image:new({parent=self, name="image", img="player", posParent=phys, ox=-2, oy=-2})
+	local rect = rectangle:new({parent=self, posParent=phys, w=50, h=100, r=200, g=50, b=50})
 		
 	self:addComponent(phys)
-	self:addComponent(img)
+	self:addComponent(rect)
 end
