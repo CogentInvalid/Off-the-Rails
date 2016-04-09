@@ -42,11 +42,12 @@ function game:init()
 	
 	self:addEnt(enemy, {x=100, y=0, w=500, h=50})
 	
-	self:addEnt(wall, {x=-250, y=200, w=500, h=50})
-	
 	self:addEnt(instructions, {x=0, y=-100, text="Hello world!"})
 	
 	self.camMan:setTarget(self.player:getComponent("physics"), 0, 0)
+	self.camMan.lockY = true
+	
+	self.levMan:startLevel()
 
 end
 
@@ -117,6 +118,10 @@ function game:keypressed(key)
 end
 
 function game:mousepressed(button)
+end
+
+function game:joystickpressed()
+	--crash("IT WORK")
 end
 
 function game:addSystem(sys, args)

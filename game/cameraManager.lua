@@ -9,6 +9,8 @@ function cameraManager:initialize(parent)
 	self.x = self.cam.x; self.y = self.cam.y
 	self.followSpeed = 3
 	
+	self.lockY = false
+	
 	self.targetScale = 1
 	self.cam.scale = self.targetScale
 	self.scaleSpeed = 1
@@ -17,7 +19,7 @@ end
 function cameraManager:update(dt)
 	if self.target then
 		self.x = self.x - (self.x - (self.target.x+self.targetOffset.x))*self.followSpeed*dt
-		self.y = self.y - (self.y - (self.target.y+self.targetOffset.y))*self.followSpeed*dt
+		if not self.lockY then self.y = self.y - (self.y - (self.target.y+self.targetOffset.y))*self.followSpeed*dt end
 	end
 	
 	self.cam.scale = self.cam.scale - (self.cam.scale - self.targetScale)*self.scaleSpeed*dt
