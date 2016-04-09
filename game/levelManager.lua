@@ -48,7 +48,6 @@ function levelManager:loadTrainCar()
 		self.carIndex = self.carIndex+1
 	end
 	
-	--self:addToCar(car, self.parent:addEnt(enemy, {x=self.width+400, y=150}, true)) --an enemy
 	self.width = self.width + 750 + 150
 end
 
@@ -71,15 +70,16 @@ end
 function levelManager:update(dt)
 	local player = self.parent.player:getComponent("physics")
 	
-	if self.lastCar == 3 and player.x > self.width-1000 then
-		self:removeFirstCar()
-	end
+	--if self.lastCar == 3 and player.x > self.width-1000 then
+	--	self:removeFirstCar()
+	--end
 	if player.x > self.width-1000 then
 		self:loadTrainCar()
 	end
 end
 
 function levelManager:enterCar(car)
+	if self.currentCar > 2 then self:removeFirstCar() end
 	self.currentCar = self.currentCar + 1
 	for i, entity in ipairs(car) do
 		entity:notifyComponents("activate")

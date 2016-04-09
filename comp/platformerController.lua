@@ -11,8 +11,8 @@ function platformerController:initialize(args)
 	self.dir = 1 --facing left or right
 	self.ducking = false
 	
-	self.dodgeTimer = 1
-	self.dodgeCooldown = 1
+	self.dodgeTimer = 0.5
+	self.dodgeCooldown = 0.8
 	self.canDodge = true
 	
 	self.phys = self.parent:getComponent("physics")
@@ -67,21 +67,33 @@ function platformerController:update(dt)
 	
 	--dodging
 	local fadeSpeed = 20
-	if input:keyDown("dodge") then
+	if input:keyDown("dodge") and self.canDodge then
 		phys.inBackground = true
 		local rect = self.parent:getComponent("rectangle")
 		rect.r = rect.r - (rect.r - 40)*fadeSpeed*dt
 		rect.g = rect.g - (rect.g - 40)*fadeSpeed*dt
 		rect.b = rect.b - (rect.b - 80)*fadeSpeed*dt
 		rect.drawLayer = "background"
-	end
-	if (not input:keyDown("dodge")) then
+		self.dodgeTimer = self.dodgeTimer - dt
+		if self.dodgeTimer < 0 then
+			self.canDodge = false
+		end
+	else
 		phys.inBackground = false
 		local rect = self.parent:getComponent("rectangle")
 		rect.r = rect.r - (rect.r - 100)*fadeSpeed*dt
 		rect.g = rect.g - (rect.g - 100)*fadeSpeed*dt
 		rect.b = rect.b - (rect.b - 200)*fadeSpeed*dt
 		rect.drawLayer = "player"
+		self.dodgeTimer = 0.8
+	end
+	
+	if not self.canDodge then
+		self.dodgeCooldown = self.dodgeCooldown - dt
+		if self.dodgeCooldown <= 0 then
+			self.canDodge = true
+			self.dodgeCooldown = 0.5
+		end
 	end
 	
 end
