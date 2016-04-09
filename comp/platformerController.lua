@@ -66,9 +66,9 @@ function platformerController:update(dt)
 	if input:keyDown("dodge") then
 		phys.inBackground = true
 		local rect = self.parent:getComponent("rectangle")
-		rect.r = rect.r - (rect.r - 30)*fadeSpeed*dt
-		rect.g = rect.g - (rect.g - 30)*fadeSpeed*dt
-		rect.b = rect.b - (rect.b - 60)*fadeSpeed*dt
+		rect.r = rect.r - (rect.r - 40)*fadeSpeed*dt
+		rect.g = rect.g - (rect.g - 40)*fadeSpeed*dt
+		rect.b = rect.b - (rect.b - 80)*fadeSpeed*dt
 		rect.drawLayer = "background"
 	end
 	if (not input:keyDown("dodge")) then

@@ -23,6 +23,7 @@ require "comp/topDownController"
 require "comp/platformerController"
 require "comp/text"
 require "comp/person"
+require "comp/AI"
 require "comp/cameraTrigger"
 require "comp/trainCarTrigger"
 
@@ -46,10 +47,10 @@ function game:init()
 
 	--entities
 	self.ent = {}
-	
-	self.levMan:startLevel()
 
 	self.player = self:addEnt(player, {x=0, y=100}, true)
+	
+	self.levMan:startLevel()
 	
 	self:addEnt(enemy, {x=200, y=0, w=500, h=50})
 	self:addEnt(weapon, {x=150, y=100})
@@ -139,8 +140,12 @@ end
 function game:mousepressed(button)
 end
 
-function game:joystickpressed()
-	--crash("IT WORK")
+function game:joystickpressed(joystick, button)
+	self.inputMan:joystickpressed(button)
+end
+
+function game:joystickaxis(joystick, axis, value)
+	self.inputMan:joystickaxis(axis, value)
 end
 
 function game:addSystem(sys, args)
