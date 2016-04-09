@@ -84,8 +84,6 @@ function game:init()
 	
 	self.camMan:setTarget(self.player:getComponent("physics"), 0, 0)
 	--self.camMan.lockY = true
-	self.camMan:setScale(2)
-	self.camMan:setTargetScale(2)
 
 end
 

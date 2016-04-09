@@ -1,13 +1,15 @@
 text = class("text", component)
 
 function text:initialize(args)
-	component.initialize(self, args)
+	--crash(inspect(args.delay))
 	self.id = "text"
 	self.text = args.text
+	self.delay = args.delay or 0
 	self.x = args.x
 	self.y = args.y
 	self.drawLayer = "default"
 	self.a = args.a or 0
+	self.activated = false
 end
 
 function text:offset(args)
@@ -15,10 +17,17 @@ function text:offset(args)
 	self.y = self.y + args.y
 end
 
-function text:update()
-	if self.a < 1 then
-		self.a = self.a + 0.4*dt
+function text:update(dt)
+	if self.a < 1 and self.activated then
+		if self.delay > 0 then
+			self.delay = self.delay - dt
+		end
+		if self.delay <= 0 then self.a = self.a + 0.4*dt end
 	end
+end
+
+function text:activate()
+	self.activated = true
 end
 
 function text:draw(args)

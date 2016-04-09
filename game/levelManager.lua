@@ -13,7 +13,7 @@ end
 
 function levelManager:startLevel()
 	self:loadTrainCar()
-  
+	self:enterCar(self.cars[1])
 end
 
 function levelManager:loadTrainCar()
@@ -30,7 +30,7 @@ function levelManager:loadTrainCar()
 	self:addToCar(self.lastCar, camTrigger)
 	camTrigger:addComponent(cameraTrigger:new({parent=camTrigger, camx=self.width+400, camy=0}))
 	if #self.cars > 1 then
-		camTrigger:addComponent(trainCarTrigger:new({parent=camTrigger}))
+		camTrigger:addComponent(trainCarTrigger:new({parent=camTrigger, car=self.cars[self.lastCar]}))
 	end
 	
 	for i=0, 9 do
@@ -79,6 +79,9 @@ function levelManager:update(dt)
 	end
 end
 
-function levelManager:enterNextCar()
+function levelManager:enterCar(car)
 	self.currentCar = self.currentCar + 1
+	for i, entity in ipairs(car) do
+		entity:notifyComponents("activate")
+	end
 end
