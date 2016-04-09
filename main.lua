@@ -56,14 +56,6 @@ function love.keypressed(key)
 	if key == "escape" then love.event.quit() end
 end
 
-function love.joystickpressed(joystick, button)
-	debug(button)
-end
-
-function love.joystickaxis( joystick, axis, value )
-	--debug(inspect(value))
-end
-
 function debug(msg, dur, cat)
 	dur = dur or 5
 	if cat then debugger:cat(msg, dur)

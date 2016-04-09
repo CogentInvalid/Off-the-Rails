@@ -11,6 +11,8 @@ function inputManager:initialize(parent)
 		down = "duck"
 	}
 	
+	self.bind["3"] = "jump"
+	
 	self.map = {
 		jump = self.jump,
 		shoot = self.shoot
@@ -25,6 +27,17 @@ function inputManager:keypressed(key)
 	if self.map[self.bind[key]] ~= nil then
 		self.map[self.bind[key]](self)
 	end
+end
+
+function inputManager:joystickpressed(button)
+	if self.map[self.bind["" .. button]] ~= nil then
+		self.map[self.bind["" .. button]](self)
+	end
+	debug(button)
+end
+
+function inputManager:joystickaxis(axis, value)
+	
 end
 
 function inputManager:jump()
@@ -44,6 +57,15 @@ function inputManager:keyDown(bind)
 	for key, b in pairs(self.bind) do
 		if bind == b then
 			if keyDown(key) then return true end
+		end
+	end
+	local joysticks = love.joystick.getJoysticks()
+	for i, joy in ipairs(joysticks) do
+		--if joy:isDown(3) then crash() end
+		for key, b in pairs(self.bind) do
+			if bind == b and tonumber(key) ~= nil then
+				if joy:isDown(tonumber(key)) then return true end
+			end
 		end
 	end
 	return false

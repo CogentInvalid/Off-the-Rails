@@ -16,4 +16,5 @@ function enemy:initialize(args)
 	self:addComponent(phys)
 	self:addComponent(rect)
 	self:addComponent(person:new({parent=self}))
+	self:addComponent(Ai:new({parent=self, target=self.game.player:getComponent("physics")}))
 end
