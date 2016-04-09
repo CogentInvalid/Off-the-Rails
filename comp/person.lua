@@ -2,11 +2,12 @@ person = class("person", component)
 
 function person:initialize(args)
 	component.initialize(self, args)
+	self.friendly = args.friendly
 end
 
 function person:collisionDetected(col)
 	if col.other.parent.id == "bullet" then
-		if col.other.parent.friendly ~= self.parent.friendly then
+		if col.other.parent.friendly ~= self.friendly then
 			self.parent.die = true
 			col.other.parent.die = true
 			

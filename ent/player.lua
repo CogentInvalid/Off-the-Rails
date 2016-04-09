@@ -19,4 +19,5 @@ function player:initialize(args)
 	self:addComponent(controller)
 	self:addComponent(phys)
 	self:addComponent(rect)
+	self:addComponent(person:new({parent=self, friendly=true}))
 end
