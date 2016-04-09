@@ -75,7 +75,8 @@ function game:init()
   }
   
   self.trainCars[2].ents = {
-    {class = instructions, args={x=100, y=-50, text="Pick up the weapon.\nYour date is counting on it."}}
+    {class = instructions, args={x=100, y=-50, text="Pick up the weapon.\nYour date is counting on it."}},
+    {class = weapon, args={x=300, y=210}}
   }
   
   self.trainCars[3].ents = {
