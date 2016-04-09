@@ -11,6 +11,10 @@ function platformerController:initialize(args)
 	self.dir = 1 --facing left or right
 	self.ducking = false
 	
+	self.dodgeTimer = 1
+	self.dodgeCooldown = 1
+	self.canDodge = true
+	
 	self.phys = self.parent:getComponent("physics")
 end
 

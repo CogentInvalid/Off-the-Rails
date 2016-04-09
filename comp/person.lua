@@ -6,8 +6,9 @@ function person:initialize(args)
 end
 
 function person:collisionDetected(col)
+	local phys = self.parent:getComponent("physics")
 	if col.other.parent.id == "bullet" then
-		if col.other.parent.friendly ~= self.friendly then
+		if col.other.parent.friendly ~= self.friendly and col.other.inBackground == phys.inBackground then
 			self.parent.die = true
 			col.other.parent.die = true
 			
