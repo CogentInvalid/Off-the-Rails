@@ -44,6 +44,10 @@ function levelManager:loadTrainCar()
 		self:addToCar(self.lastCar, ent)
 	end
 	
+	if self.parent.trainCars[self.carIndex+1] ~= nil then
+		self.carIndex = self.carIndex+1
+	end
+	
 	--self:addToCar(car, self.parent:addEnt(enemy, {x=self.width+400, y=150}, true)) --an enemy
 	self.width = self.width + 750 + 150
 end
