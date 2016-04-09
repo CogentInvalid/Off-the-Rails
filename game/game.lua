@@ -63,17 +63,52 @@ function game:init()
   self.trainCars[1] = trainCar:new()
   self.trainCars[2] = trainCar:new()
   self.trainCars[3] = trainCar:new()
+  self.trainCars[4] = trainCar:new()
+  self.trainCars[5] = trainCar:new()
+  self.trainCars[6] = trainCar:new()
+  self.trainCars[7] = trainCar:new()
+  self.trainCars[8] = trainCar:new()
+  self.trainCars[9] = trainCar:new()
   
   self.trainCars[1].ents = {
     {class = instructions, args={x=100, y=-200, text="Your date is waiting on you. Dinner will be served.\nEventually.\nUse the arrow keys to move yourself already"}}
   }
   
   self.trainCars[2].ents = {
-    {class = instructions, args={x=100, y=-50, text="Pick up the weapon"}}
+    {class = instructions, args={x=100, y=-50, text="Pick up the weapon.\nYour date is counting on it."}}
   }
   
   self.trainCars[3].ents = {
-    {class = instructions, args={x=100, y=-200, text="Kill it. Kill it.\n It can't stay between you and your date."}},
+    {class = instructions, args={x=100, y=-200, text="Kill it. Kill it.\nIt can't stay between you and your date."}},
+    {class = enemy, args = {x=600, y=50, w=500, h=50}}
+  }
+  
+  self.trainCars[4].ents = {
+    {class = instructions, args={x=100, y=-200, text="They are people coming after you."}},
+    {class = enemy, args = {x=600, y=50, w=500, h=50}}
+  }
+  
+  self.trainCars[5].ents = {
+    {class = instructions, args={x=100, y=-200, text="See I told you..."}}
+  }
+  
+  self.trainCars[6].ents = {
+    {class = instructions, args={x=100, y=-200, text="There are few losers here.\nDeal with them."}},
+    {class = enemy, args = {x=600, y=50, w=500, h=50}}, {class = enemy, args = {x=600, y=50, w=500, h=50}}, {class = enemy, args = {x=500, y=50, w=500, h=50}}
+  }
+  
+  self.trainCars[7].ents = {
+    {class = instructions, args={x=100, y=-200, text="Don't kill people.\nWhy would you?\nWhat would your lady think of you?"}},
+    {class = enemy, args = {x=600, y=50, w=500, h=50}}
+  }
+  
+  self.trainCars[8].ents = {
+    {class = instructions, args={x=100, y=-200, text="People? What people?"}},
+    {class = enemy, args = {x=600, y=50, w=500, h=50}}
+  }
+  
+  self.trainCars[9].ents = {
+    {class = instructions, args={x=100, y=-200, text="Don't kill people.\nWhy would you?\nWhat would your lady think of you?"}},
     {class = enemy, args = {x=600, y=50, w=500, h=50}}
   }
 	
