@@ -23,14 +23,13 @@ function platformerController:update(dt)
 	local input = self.game.inputMan
 
 	--x-movement
-	local accel = 2000; local maxSpeed = self.speed
-	if not phys.onGround then accel = 1200 end
+	local speed = self.speed
 	
 	if input:keyDown("left") then
-		phys:addVel(-(phys.vx+self.speed)*5*dt, 0)
+		phys:addVel(-(phys.vx+speed)*5*dt, 0)
 		self.dir = -1
 	elseif input:keyDown("right") then
-		phys:addVel(-(phys.vx-self.speed)*5*dt, 0)
+		phys:addVel(-(phys.vx-speed)*5*dt, 0)
 		self.dir = 1
 	else
 		phys:addVel(-phys.vx*5*dt, 0)
