@@ -119,6 +119,8 @@ function game:init()
 	
 	self.camMan:setTarget(self.player:getComponent("physics"), 0, 0)
 	--self.camMan.lockY = true
+	
+	self.deathTimer = 2
 
 end
 
@@ -127,6 +129,29 @@ function game:enter()
 end
 
 function game:reset()
+end
+
+function game:respawn()
+	local currentCar = self.levMan.currentCar
+	
+	
+	for i, entity in lume.ripairs(self.ent) do
+		entity:notifyComponents("destroy")
+	end
+	self.ent = {}
+	
+	self.levMan = self:addSystem(levelManager)
+	self.levMan.carIndex = currentCar
+	self.levMan.currentCar = currentCar
+  
+	self.player = self:addEnt(player, {x=0, y=100}, true)
+	
+	self.levMan:startLevel()
+	
+	self.camMan:setTarget(self.player:getComponent("physics"), 0, 0)
+	self.camMan:setPos(400,0)
+	
+	self.deathTimer = 2
 end
 
 function game:update(delta)
@@ -155,6 +180,13 @@ function game:update(delta)
 		--update systems
 		for i, system in ipairs(self.system) do
 			system:update(dt)
+		end
+		
+		if self.player.die == true then
+			self.deathTimer = self.deathTimer - dt
+			if self.deathTimer <= 0 then
+				self:respawn()
+			end
 		end
 
 		accum = accum - 0.01
@@ -197,11 +229,13 @@ function game:draw()
 	self.camMan.cam:detach()
 	
 	--ui stuff goes here
+	debugger:draw()
 
 end
 
 function game:keypressed(key)
 	self.inputMan:keypressed(key)
+	if key == "q" then self:respawn() end
 end
 
 function game:mousepressed(button)
@@ -232,7 +266,7 @@ function game:addEnt(ent, args, permanent)
 	args.game = self
 	local entity = ent:new(args)
 	self.ent[#self.ent+1] = entity
-	if not permanent then self.levMan:addToCar(self.levMan.currentCar, entity) end
+	if not permanent then self.levMan:addToCarX(self.levMan.loadedCar, entity) end
 	return entity
 end
 

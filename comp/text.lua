@@ -3,7 +3,7 @@ text = class("text", component)
 function text:initialize(args)
 	--crash(inspect(args.delay))
 	self.id = "text"
-	self.text = args.text
+	self.text = args.text or "ERROR"
 	self.delay = args.delay or 0
 	self.x = args.x
 	self.y = args.y

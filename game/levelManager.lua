@@ -3,56 +3,60 @@ levelManager = class("levelManager")
 function levelManager:initialize(parent)
 	self.parent = parent
 	
-	self.width = 0
+	self.rightSide = 0
 	
 	self.cars = {}
-	self.currentCar = 1
-	self.lastCar = 1
-	self.carIndex = 1
+	self.carIndex = 1 --next trainCar to load
+	self.currentCar = 1 --trainCar that player's in
+end
+
+function levelManager:update()
+	debug(self.currentCar .. ", " .. self.carIndex)
 end
 
 function levelManager:startLevel()
 	self:loadTrainCar()
-	self:enterCar(self.cars[1])
 end
 
 function levelManager:loadTrainCar()
-	self.lastCar = #self.cars+1
-	self.cars[self.lastCar] = {}
+	local i = #self.cars+1
+	self.cars[i] = {}
 	
-	self:addToCar(self.lastCar, self.parent:addEnt(wall, {x=self.width, y=250, w=800, h=20}, true)) --floor
-	self:addToCar(self.lastCar, self.parent:addEnt(wall, {x=self.width, y=250, w=800, h=20}, true)) --floor
-	self:addToCar(self.lastCar, self.parent:addEnt(wall, {x=self.width, y=-100, w=800, h=20}, true)) --ceiling
-	self:addToCar(self.lastCar, self.parent:addEnt(wall, {x=self.width, y=-100, w=20, h=200}, true)) --left wall
-	self:addToCar(self.lastCar, self.parent:addEnt(wall, {x=self.width+780, y=-100, w=20, h=200}, true)) --right wall
+	--load walls into self.cars[i]
+	self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide, y=250, w=800, h=20}, true)) --floor
+	self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide, y=250, w=800, h=20}, true)) --floor
+	self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide, y=-100, w=800, h=20}, true)) --ceiling
+	self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide, y=-100, w=20, h=200}, true)) --left wall
+	self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide+780, y=-100, w=20, h=200}, true)) --right wall
 	
-	local camTrigger = self.parent:addEnt(trigger, {x=self.width, y=50, w=200, h=200}, true) --trigger
-	self:addToCar(self.lastCar, camTrigger)
-	camTrigger:addComponent(cameraTrigger:new({parent=camTrigger, camx=self.width+400, camy=0}))
-	if #self.cars > 1 then
-		camTrigger:addComponent(trainCarTrigger:new({parent=camTrigger, car=self.cars[self.lastCar]}))
+	for x=0, 9 do
+		self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide+800+x*10+1, y=250, w=8, h=10}, true)) --floor
 	end
 	
-	for i=0, 9 do
-		self:addToCar(self.lastCar, self.parent:addEnt(wall, {x=self.width+800+i*10+1, y=250, w=8, h=10}, true)) --floor
-	end
+	--load trigger
+	local camTrigger = self.parent:addEnt(trigger, {x=self.rightSide, y=50, w=200, h=200}, true) --trigger
+	self:addToCar(i, camTrigger)
+	camTrigger:addComponent(cameraTrigger:new({parent=camTrigger, camx=self.rightSide+400, camy=0}))
+	camTrigger:addComponent(trainCarTrigger:new({parent=camTrigger, car=self.cars[i], index = self.carIndex}))
 	
+	--load trainCar
 	local trainCar = self.parent.trainCars[self.carIndex]
-	for i, entity in ipairs(trainCar.ents) do
+	for q, entity in ipairs(trainCar.ents) do
 		local ent = self.parent:addEnt(entity.class, entity.args, true)
-		ent:notifyComponents("offset", {x=self.width, y=0})
-		self:addToCar(self.lastCar, ent)
+		ent:notifyComponents("offset", {x=self.rightSide, y=0})
+		self:addToCar(i, ent)
 	end
 	
-	if self.parent.trainCars[self.carIndex+1] ~= nil then
-		self.carIndex = self.carIndex+1
-	end
-	
-	self.width = self.width + 750 + 150
+	self.rightSide = self.rightSide + 750 + 150
+	if self.parent.trainCars[self.carIndex] ~= nil then self.carIndex = self.carIndex + 1 end
 end
 
 function levelManager:addToCar(i, ent)
 	table.insert(self.cars[i], ent)
+end
+
+function levelManager:addToCarX(t, ent)
+	table.insert(t, ent)
 end
 
 function levelManager:removeFirstCar()
@@ -62,26 +66,17 @@ function levelManager:removeFirstCar()
 			entity.die = true
 		end
 		table.remove(self.cars, 1)
-		self.lastCar = self.lastCar - 1
-		self.currentCar = self.currentCar - 1
 	end
 end
 
-function levelManager:update(dt)
-	local player = self.parent.player:getComponent("physics")
-	
-	--if self.lastCar == 3 and player.x > self.width-1000 then
-	--	self:removeFirstCar()
-	--end
-	if player.x > self.width-1000 then
-		self:loadTrainCar()
-	end
-end
-
-function levelManager:enterCar(car)
-	if self.currentCar > 2 then self:removeFirstCar() end
-	self.currentCar = self.currentCar + 1
+function levelManager:enterCar(car, index)
+	self.currentCar = index
+	self.loadedCar = car
+	self:loadTrainCar()
 	for i, entity in ipairs(car) do
 		entity:notifyComponents("activate")
+	end
+	if #self.cars > 3 then
+		self:removeFirstCar()
 	end
 end
