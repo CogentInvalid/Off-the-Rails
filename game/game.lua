@@ -236,7 +236,9 @@ function game:draw()
 end
 
 function game:keypressed(key)
-	self.inputMan:keypressed(key)
+	if not self.player.die then
+		self.inputMan:keypressed(key)
+	end
 	if key == "q" then self:respawn() end
 end
 

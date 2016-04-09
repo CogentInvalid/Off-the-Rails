@@ -34,7 +34,7 @@ function cameraManager:update(dt)
 	
 	self.cam:lookAt(self.x, self.y)
 	
-	--self.cam.scale = 0.2
+	--self.cam.scale = 0.4
 end
 
 function cameraManager:setTarget(target, ox, oy)

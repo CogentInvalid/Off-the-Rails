@@ -5,28 +5,54 @@ function Ai:initialize(args)
   self.type = "Ai"
   self.target = args.target
   self.phys = self.parent:getComponent("physics")
-	self.shootTimer = 2
-	self.dir = 1
+	self.shootTimer = 1
+	
+	self.actions = {["walkForward"]=1, ["shoot"]=2, ["dodge"]=1}
+	self.currentAction = "shoot"
+	self.actionTimer = 2
+	
+	self.active = false
+	
 end
 
 function Ai:update(dt)
-	
-	if self.phys.x < self.target.x then self.dir = 1 else self.dir = -1 end
-	
-	local rect = self.parent:getComponent("rectangle")
-	if self:targetVisible() then
-		rect.r = 255
-		if self.shootTimer > 0 then
-			self.shootTimer = self.shootTimer - dt
-			if self.shootTimer <= 0 then
-				self.shootTimer = 2
-				self:shootPlayer()
-			end
+	if self.active then
+		self[self.currentAction](self)
+		self.actionTimer = self.actionTimer - dt
+		if self.actionTimer <= 0 then
+			self.currentAction = lume.weightedchoice(self.actions)
+			self[self.currentAction](self, true)
 		end
-	else
-		rect.r = 255
-		self.shootTimer = 2
 	end
+	self.phys:addVel(-(self.phys.vx)*3*dt, 0)
+end
+
+function Ai:activate()
+	self.active = true
+end
+
+function Ai:shoot(start)
+	if start then self.actionTimer = 2 end
+	if self:targetVisible() then
+		self.shootTimer = self.shootTimer - dt
+		if self.shootTimer <= 0 then
+			self.shootTimer = 1
+			self:shootPlayer()
+		end
+	end
+end
+
+function Ai:walkForward(start)
+	if start then self.actionTimer = math.random()+1.5 end
+	if self:targetVisible() and self:distToPlayer() > 150 then
+		local dir = 1
+		if self.phys.x > self.target.x then dir = -1 end
+		self.phys:addVel(-(self.phys.vx-(150*dir))*5*dt, 0)
+	end
+end
+
+function Ai:dodge(start)
+	if start then self.actionTimer = 2 end
 end
 
 function Ai:shootPlayer()
@@ -36,9 +62,13 @@ function Ai:shootPlayer()
 end
 
 function Ai:targetVisible()
-  if (math.abs(self.phys.x - self.target.x) < 500) then
+  if (math.abs(self.phys.x - self.target.x) < 5000) then
     return true
   end
+end
+
+function Ai:distToPlayer()
+	return math.abs(self.phys.x - self.target.x)
 end
 
 
