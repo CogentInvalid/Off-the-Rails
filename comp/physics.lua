@@ -1,8 +1,5 @@
 --physics component: handles position, width, height, motion, and some collision stuff.
 
---THOUGHT: keep tabs on all components that can respond to collisions?
---that way you don't have to check them all each time
-
 physics = class("physics", component)
 
 function physics:initialize(args)
@@ -12,7 +9,7 @@ function physics:initialize(args)
 	self.collideOrder = {physics.isSolid, physics.isStatic}
 
 	self.x = args.x; self.y = args.y
-	self.px = self.x; self.py = self.y --px/py can't really be counted on any more
+	self.px = self.x; self.py = self.y
 	self.w = args.w; self.h = args.h
 
 	self.vx = 0
@@ -28,7 +25,7 @@ function physics:initialize(args)
 	self.col = args.col --does this collide with other objects?
 	if args.col == nil then self.col = true end
 	
-	self.world = self.game.colMan:addToWorld(self) --kinda sketchy
+	self.world = self.game.colMan:addToWorld(self) 
 end
 
 function physics:destroy()

@@ -23,11 +23,12 @@ function platformerController:update(dt)
 	local accel = 2000; local maxSpeed = self.speed
 	if not phys.onGround then accel = 1200 end
 	
-	if input:keyDown("left") and phys.vx > -maxSpeed then
-		phys:addVel(-accel*dt, 0)
-	end
-	if input:keyDown("right") and phys.vx < maxSpeed then
-		phys:addVel(accel*dt, 0)
+	if input:keyDown("left") then
+		phys:addVel(-(phys.vx+self.speed)*5*dt, 0)
+	elseif input:keyDown("right") then
+		phys:addVel(-(phys.vx-self.speed)*5*dt, 0)
+	else
+		phys:addVel(-phys.vx*5*dt, 0)
 	end
 
 	--jumping/falling
@@ -37,13 +38,6 @@ function platformerController:update(dt)
 		if input:keyDown("jump") then phys.gravScale = 500
 		else phys.gravScale = 2000 end
 		if not self.airControl then phys.gravScale = 500 end
-	end
-	
-	--friction
-	if phys.onGround then
-		if phys.vx > 0 then phys.vx = phys.vx - (600*dt)
-		else if phys.vx < 0 then phys.vx = phys.vx + (600*dt) end end
-		if phys.vx > -(600*dt) and phys.vx < (600*dt) then phys.vx = 0 end
 	end
 	
 end
