@@ -9,6 +9,8 @@ function cameraManager:initialize(parent)
 	self.x = self.cam.x; self.y = self.cam.y
 	self.followSpeed = 3
 	
+	self.screenshake = 0
+	
 	self.lockY = false
 	
 	self.targetScale = 1
@@ -22,9 +24,17 @@ function cameraManager:update(dt)
 		if not self.lockY then self.y = self.y - (self.y - (self.target.y+self.targetOffset.y))*self.followSpeed*dt end
 	end
 	
+	if self.screenshake > 0 then
+		self.screenshake = self.screenshake - dt
+		self.x = self.x + (math.random()-0.5)*10000*self.screenshake*dt
+		self.y = self.y + (math.random()-0.5)*10000*self.screenshake*dt
+	end
+	
 	self.cam.scale = self.cam.scale - (self.cam.scale - self.targetScale)*self.scaleSpeed*dt
 	
 	self.cam:lookAt(self.x, self.y)
+	
+	--self.cam.scale = 0.2
 end
 
 function cameraManager:setTarget(target, ox, oy)

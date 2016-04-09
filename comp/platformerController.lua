@@ -9,6 +9,7 @@ function platformerController:initialize(args)
 	self.jumpForce = args.jumpForce or 300
 	
 	self.dir = 1 --facing left or right
+	self.ducking = false
 	
 	self.phys = self.parent:getComponent("physics")
 end
@@ -44,6 +45,41 @@ function platformerController:update(dt)
 		if not self.airControl then phys.gravScale = 500 end
 	end
 	
+	--ducking
+	if input:keyDown("duck") and not self.ducking then
+		self.ducking = true
+		phys:setDimensions(phys.w, 60)
+		phys:addPos(0, 40)
+		local rect = self.parent:getComponent("rectangle")
+		rect.w = phys.w; rect.h = phys.h
+	end
+	if (not input:keyDown("duck")) and self.ducking then
+		self.ducking = false
+		phys:setDimensions(phys.w, 100)
+		phys:addPos(0, -phys.h/2)
+		local rect = self.parent:getComponent("rectangle")
+		rect.w = phys.w; rect.h = phys.h
+	end
+	
+	--dodging
+	local fadeSpeed = 20
+	if input:keyDown("dodge") then
+		phys.inBackground = true
+		local rect = self.parent:getComponent("rectangle")
+		rect.r = rect.r - (rect.r - 30)*fadeSpeed*dt
+		rect.g = rect.g - (rect.g - 30)*fadeSpeed*dt
+		rect.b = rect.b - (rect.b - 60)*fadeSpeed*dt
+		rect.drawLayer = "background"
+	end
+	if (not input:keyDown("dodge")) then
+		phys.inBackground = false
+		local rect = self.parent:getComponent("rectangle")
+		rect.r = rect.r - (rect.r - 100)*fadeSpeed*dt
+		rect.g = rect.g - (rect.g - 100)*fadeSpeed*dt
+		rect.b = rect.b - (rect.b - 200)*fadeSpeed*dt
+		rect.drawLayer = "player"
+	end
+	
 end
 
 function platformerController:jump()
@@ -52,6 +88,7 @@ end
 
 function platformerController:shoot()
 	self.parent.game:addEnt(bullet, {x=self.phys.x+self.phys.w/2, y=self.phys.y+self.phys.h/2, dir=self.dir, friendly=true})
+	self.parent.game.camMan.screenshake = 0.2
 end
 
 function platformerController:sideHit(args)
@@ -61,4 +98,8 @@ function platformerController:sideHit(args)
 end
 
 function platformerController:collisionDetected(col)
+	if col.other.parent.id == "trigger" then
+		--col.other.parent:getComponentByName("trigger"):triggered()
+		col.other.parent:notifyComponents("triggered")
+	end
 end

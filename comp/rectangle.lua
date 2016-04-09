@@ -9,6 +9,7 @@ function rectangle:initialize(args)
 	self.r = args.r or 255
 	self.g = args.g or 255
 	self.b = args.b or 255
+	self.a = args.a or 255
 	
 	self.w = args.w
 	self.h = args.h
@@ -55,6 +56,6 @@ function rectangle:draw()
 	if self.posParent then
 		self.x = self.posParent.x; self.y = self.posParent.y
 	end
-	love.graphics.setColor(self.r, self.g, self.b)
+	love.graphics.setColor(self.r, self.g, self.b, self.a)
 	love.graphics.rectangle("fill", self.x+self.ox, self.y+self.oy, self.w, self.h)
 end

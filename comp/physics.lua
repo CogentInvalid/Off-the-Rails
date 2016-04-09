@@ -19,8 +19,10 @@ function physics:initialize(args)
 	self.gravity = args.gravity or false
 	self.gravScale = args.gravScale or 300
 	self.onGround = nil
+	self.friction = args.friction
 	
 	self.solidity = args.solidity
+	self.inBackground = false
 
 	self.col = args.col --does this collide with other objects?
 	if args.col == nil then self.col = true end
@@ -52,6 +54,10 @@ function physics:update(dt)
 	
 	if self.gravity then
 		self.vy = self.vy + self.gravScale*dt
+	end
+	
+	if self.friction and self.onGround then
+		self:addVel(-self.vx*5*dt, 0)
 	end
 	
 	self.onGround = false
@@ -99,4 +105,8 @@ end
 function physics:addVel(x,y)
 	self.vx = self.vx + x
 	self.vy = self.vy + y
+end
+
+function physics:setDimensions(w,h)
+	self.w = w; self.h = h
 end

@@ -7,7 +7,8 @@ function inputManager:initialize(parent)
 		z = "jump", up = "dodge", w = "jump", space = "jump",
 		left = "left", a = "left",
 		right = "right", d = "right",
-		x = "shoot"
+		x = "shoot",
+		down = "duck"
 	}
 	
 	self.map = {

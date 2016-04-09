@@ -11,7 +11,7 @@ function player:initialize(args)
 	local y = args.y or 100
 	local phys = physics:new({parent=self, x=x, y=y, w=50, h=100, gravity=true})
 
-	local rect = rectangle:new({parent=self, w=50, h=100, posParent=phys, r=100, g=100, b=200})
+	local rect = rectangle:new({parent=self, w=50, h=100, posParent=phys, r=100, g=100, b=200, drawLayer="player"})
 	
 	--local controller = topDownController:new({parent=self})
 	local controller = platformerController:new({parent=self})

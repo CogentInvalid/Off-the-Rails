@@ -7,7 +7,7 @@ function bullet:initialize(args)
 	self.friendly = args.friendly
 	
 	local direction = args.dir or 1
-	local speed = 1000
+	local speed = 2000
 	local phys = physics:new({parent=self, x=args.x, y=args.y, w=6, h=6, col=true})
 	phys.vx = speed*direction
 	

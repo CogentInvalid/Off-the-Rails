@@ -4,6 +4,8 @@ function enemy:initialize(args)
 	gameObject.initialize(self, args)
 	self.id = "enemy"
 	
+	self.friendly = false
+	
 	local x = args.x or 100
 	local y = args.y or 100
   
@@ -13,4 +15,5 @@ function enemy:initialize(args)
 		
 	self:addComponent(phys)
 	self:addComponent(rect)
+	self:addComponent(person:new({parent=self}))
 end
