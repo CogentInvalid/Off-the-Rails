@@ -39,11 +39,13 @@ function game:init()
 	
 	self.drawLayers = {"background", "default", "player"}
   
-	self.bg_image = love.graphics.newImage("res/img/nightSky.jpg")
+	self.bg_sky_image = love.graphics.newImage("res/img/nightSky.jpg")
 	self.bgX1 = 0
 	self.bgY1 = 0
 	self.bgX2 = 2560
 	self.bgY2 = 0
+  
+  self.bg_ground_image = love.graphics.newImage("res/img/groundBackground.png")
 
 	--systems
 	self.system = {}
@@ -199,9 +201,12 @@ function game:draw()
   
   love.graphics.setColor(255,255,255)  
 
-  love.graphics.draw(self.bg_image, self.bgX1, self.bgY1)
-	love.graphics.draw(self.bg_image, self.bgX2, self.bgY2)  
-
+  love.graphics.draw(self.bg_sky_image, self.bgX1, self.bgY1)
+	love.graphics.draw(self.bg_sky_image, self.bgX2, self.bgY2) 
+  
+  love.graphics.draw(self.bg_ground_image, self.bgX1, self.bgY1)
+	love.graphics.draw(self.bg_ground_image, self.bgX2, self.bgY2) 
+  
 	--attach camera
 	self.camMan.cam:attach()
 
