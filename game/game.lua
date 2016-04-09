@@ -85,7 +85,7 @@ function game:init()
   }
   
   self.trainCars[4].ents = {
-    {class = instructions, args={x=100, y=-200, text="They are people coming after you."}},
+    {class = instructions, args={x=100, y=-200, text="They are coming after you."}},
     {class = enemy, args = {x=600, y=50, w=500, h=50}}
   }
   
@@ -94,7 +94,7 @@ function game:init()
   }
   
   self.trainCars[6].ents = {
-    {class = instructions, args={x=100, y=-200, text="There are few losers here.\nDeal with them."}},
+    {class = instructions, args={x=100, y=-200, text="There are a few losers here.\nDeal with them."}},
     {class = enemy, args = {x=600, y=50, w=500, h=50}}, {class = enemy, args = {x=600, y=50, w=500, h=50}}, {class = enemy, args = {x=500, y=50, w=500, h=50}}
   }
   
