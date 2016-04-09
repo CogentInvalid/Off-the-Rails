@@ -2,6 +2,7 @@ require "game/collisionManager"
 require "game/cameraManager"
 require "game/inputManager"
 require "game/levelManager"
+require "game/trainCar"
 
 --TODO: load all components/entities automatically
 require "ent/gameObject"
@@ -45,11 +46,24 @@ function game:init()
 	self.levMan = self:addSystem(levelManager)
 
 	--entities
-	self.ent = {}
-	
-	self.levMan:startLevel()
-
-	self.player = self:addEnt(player, {x=0, y=100}, true)
+  
+  self.ent = {}
+  
+  self.levMan:startLevel()
+  
+  self.player = self:addEnt(player, {x=0, y=100}, true)
+  
+  self.car1 = trainCar:new()
+  self.car2 = trainCar:new()
+  
+  
+  self.car1.ents = {
+    {class = instructions, args={x=100, y=-50, text="Your date is waiting on you. Dinner will be served. Eventually. Use the arrows keys to move yourself already"}}
+    }
+  
+  self.car2.ents = {
+    {class = instructions, args={x=100, y=-50, text="Pick up the weapon"}}
+  }
 	
 	self:addEnt(enemy, {x=200, y=0, w=500, h=50})
 	self:addEnt(weapon, {x=150, y=100})
