@@ -7,7 +7,7 @@ function text:initialize(args)
 	self.delay = args.delay or 0
 	self.x = args.x
 	self.y = args.y
-	self.drawLayer = "default"
+	self.drawLayer = args.drawLayer or "default"
 	self.a = args.a or 0
 	self.activated = false
 end

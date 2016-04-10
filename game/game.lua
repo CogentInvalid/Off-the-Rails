@@ -91,7 +91,7 @@ function game:init()
   
   
   self.trainCars[1].ents = {
-    {class = instructions, args={x=100, y=-200, text="Your lovely date is waiting on you. Dinner will be served.\nEventually.\nUse the arrow keys to move yourself already"}}
+    {class = instructions, args={x=100, y=-200, text="Your lovely date is waiting on you. Dinner will be served.\nEventually.\nUse the arrow keys to move yourself already"}},
   }
   
   self.trainCars[2].ents = {
@@ -157,12 +157,15 @@ function game:init()
   }
   
     self.trainCars[11].ents = {
-		{class = instructions, args={x=100, y=-200, text="Come at me!", delay=1}},    
+		{class = instructions, args={x=100, y=-200, text="Come at me!", delay=1}},
+		{class = enemy, args = {x=200, y=-300, w=500, h=50}},
+		{class = enemy, args = {x=600, y=-300, w=500, h=50}},
 		{class = enemySpawner, args={side=1, delay=1}},
 		{class = enemySpawner, args={side=1, delay=2}},
 		{class = enemySpawner, args={side=1, delay=3}},
 		{class = enemySpawner, args={side=1, delay=4}}
   }
+	self.trainCars[11].openCeiling = true
   
     self.trainCars[12].ents = {
     {class = instructions, args={x=100, y=-200, text="Oh yeah", delay=1}},
@@ -229,8 +232,9 @@ function game:respawn()
 	self.ent = {}
 	
 	self.levMan = self:addSystem(levelManager)
-	self.levMan.carIndex =  14--currentCar
-	self.levMan.currentCar = 13--currentCar
+
+	self.levMan.carIndex =  currentCar
+	self.levMan.currentCar = currentCar
   
 	self.player = self:addEnt(player, {x=50, y=150}, true)
 	self.player:getComponent("platformerController").hasWeapon = true

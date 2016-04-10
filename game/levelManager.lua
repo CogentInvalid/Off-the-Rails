@@ -24,7 +24,11 @@ function levelManager:loadTrainCar()
 	local trainCar = self.parent.trainCars[self.carIndex]
 	
 	--background
-	self:addToCar(i, self.parent:addEnt(background, {x=self.rightSide-122, y=-330, img="trainCar", sx=0.41, sy=0.5}, true))
+	if not trainCar.openCeiling then
+		self:addToCar(i, self.parent:addEnt(background, {x=self.rightSide-122, y=-330, img="trainCar", sx=0.41, sy=0.5}, true))
+	else
+		self:addToCar(i, self.parent:addEnt(background, {x=self.rightSide-122, y=-330, img="trainCar-open", sx=0.41, sy=0.5}, true))
+	end
 	self:addToCar(i, self.parent:addEnt(background, {x=self.rightSide-122, y=220, img="trainChain", sx=0.2, sy=0.2}, true))
 	
 	--wheels
@@ -47,8 +51,12 @@ function levelManager:loadTrainCar()
 	self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide, y=250, w=800, h=20}, true)) --floor
 	self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide, y=250, w=800, h=20}, true)) --floor
 	
+	--ceiling
 	if not trainCar.openCeiling then
-		self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide, y=-100, w=800, h=20}, true)) --ceiling
+		self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide, y=-100, w=800, h=20}, true)) 
+	else
+		self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide, y=-100, w=300, h=20}, true))
+		self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide+500, y=-100, w=300, h=20}, true))
 	end
 	
 	self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide, y=-100, w=20, h=200}, true)) --left wall
