@@ -4,6 +4,7 @@ function love.conf(t)
 	t.window.height = 768
 	t.window.resizable = false
 	t.window.vsync = false
+	t.window.icon = "icon.png"
 
 	t.modules.physics = false
 end
