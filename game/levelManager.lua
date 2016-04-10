@@ -23,7 +23,7 @@ function levelManager:loadTrainCar()
 	self.cars[i] = {}
 	
 	--background
-	self:addToCar(i, self.parent:addEnt(background, {x=self.rightSide-110, y=-330, img="trainCar", sx=0.4, sy=0.5}, true))
+	self:addToCar(i, self.parent:addEnt(background, {x=self.rightSide-122, y=-330, img="trainCar", sx=0.41, sy=0.5}, true))
 	
 	--load walls into self.cars[i]
 	self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide, y=250, w=800, h=20}, true)) --floor
@@ -60,7 +60,7 @@ function levelManager:loadTrainCar()
 	end
 	
 	self.rightSide = self.rightSide + 750 + 150
-	if self.parent.trainCars[self.carIndex] ~= nil then self.carIndex = self.carIndex + 1 end
+	if self.parent.trainCars[self.carIndex+1] ~= nil then self.carIndex = self.carIndex + 1 end
 end
 
 function levelManager:addToCar(i, ent)

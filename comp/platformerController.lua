@@ -18,6 +18,7 @@ function platformerController:initialize(args)
 	self.shootCooldown = 0
 	
 	self.reloadBar = self.parent:getComponentByName("reloadBar")
+	self.reloadBar.a = 0
 	
 	self.phys = self.parent:getComponent("physics")
 end
@@ -35,13 +36,13 @@ function platformerController:update(dt)
 	if self.ducking then speed = speed / 4 end
 	
 	if input:keyDown("left") then
-		phys:addVel(-(phys.vx+speed)*5*dt, 0)
+		phys:addVel(-(phys.vx+speed)*6*dt, 0)
 		self.dir = -1
 	elseif input:keyDown("right") then
-		phys:addVel(-(phys.vx-speed)*5*dt, 0)
+		phys:addVel(-(phys.vx-speed)*6*dt, 0)
 		self.dir = 1
 	else
-		phys:addVel(-phys.vx*5*dt, 0)
+		phys:addVel(-phys.vx*6*dt, 0)
 	end
 
 	--jumping/falling
@@ -104,7 +105,7 @@ function platformerController:update(dt)
 	if self.shootCooldown > 0 then
 		self.reloadBar.a = 255
 		self.shootCooldown = self.shootCooldown - dt
-		self.reloadBar.w = 50-(self.shootCooldown*50)
+		self.reloadBar.w = 50-(self.shootCooldown/1.2*50)
 	else
 		self.reloadBar.w = 50
 		self.reloadBar.a = self.reloadBar.a - (self.reloadBar.a)*10*dt
@@ -123,7 +124,7 @@ function platformerController:shoot()
 	if self.shootCooldown <= 0 then
 		self.parent.game:addEnt(bullet, {x=self.phys.x+self.phys.w/2, y=self.phys.y+self.phys.h/2, vx=self.dir, friendly=true})
 		self.parent.game.camMan.screenshake = 0.2
-		self.shootCooldown = 1
+		self.shootCooldown = 1.2
 	end
 end
 

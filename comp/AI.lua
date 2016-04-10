@@ -7,7 +7,7 @@ function Ai:initialize(args)
   self.phys = self.parent:getComponent("physics")
 	self.shootTimer = 1.5
 	
-	self.actions = {["walkForward"]=1, ["shoot"]=2, ["dodge"]=1}
+	self.actions = {["walkForward"]=1, ["shoot"]=2.2, ["dodge"]=1}
 	self.currentAction = lume.weightedchoice(self.actions)
 	self.actionTimer = 2
 	
