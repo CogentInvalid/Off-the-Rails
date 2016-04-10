@@ -13,5 +13,12 @@ function audio:setAudio(name)
   
 end
 
+function audio:playAudio(name)
+  
+  local source = love.audio.newSource("res/audio/"..name..".ogg")
+  love.audio.play(source)
+  
+end
+
 
 

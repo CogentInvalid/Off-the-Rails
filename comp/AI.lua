@@ -104,6 +104,7 @@ function Ai:shootPlayer()
 	local ang = angle:new(self.target.x-self.phys.x, self.target.y-self.phys.y)
 	self.parent.game:addEnt(bullet, {x=self.phys.x+self.phys.w/2, y=self.phys.y+self.phys.h/2-10, vx=ang.xPart, vy=ang.yPart, friendly=false})
 	self.parent.game.camMan.screenshake = 0.2
+  audioManager:playAudio("gunShot")
 end
 
 function Ai:targetVisible()
