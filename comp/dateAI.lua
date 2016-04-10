@@ -177,10 +177,10 @@ function dateAI:collisionDetected(col)
 			self.undodgeTimer = 6
 			col.other.parent.die = true
 			audioManager:playAudio("bodyShotImpact")
-			self.parent.game.won = true
 			
 			if self.hp <= 0 then
 				self.parent.die = true
+				self.parent.game.won = true
 				local phys = col.other.parent:getComponent("physics")
 				local dir = 1
         audioManager:playAudio("dateAfterDeathCry")

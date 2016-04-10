@@ -118,6 +118,8 @@ function platformerController:update(dt)
 		self.parent.game.won = true
 	end
 	
+	if love.keyboard.isDown("l") then self.phys.vx = 5000 end
+	
 end
 
 function platformerController:jump()
