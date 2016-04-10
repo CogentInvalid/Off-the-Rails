@@ -23,7 +23,7 @@ function love.load()
 	--setup ZeroBrane IDE debugger
 	if arg[#arg] == "-debug" then require("mobdebug").start() end
 	
-	love.graphics.setDefaultFilter("linear", "linear")
+	love.graphics.setDefaultFilter("nearest", "nearest")
 
 	math.randomseed(os.time())
   
