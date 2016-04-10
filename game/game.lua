@@ -62,7 +62,7 @@ function game:init()
   
   self.ent = {}
   
-  self.player = self:addEnt(player, {x=0, y=100}, true)
+  self.player = self:addEnt(player, {x=-50, y=150}, true)
   
 	self.trainCars = {}
   
@@ -124,8 +124,9 @@ function game:init()
 	--self:addEnt(weapon, {x=150, y=100})
 	--self:addEnt(instructions, {x=100, y=-50, text="Hello world!"})
 	
-	self.camMan:setTarget(self.player:getComponent("physics"), 0, 0)
-	--self.camMan.lockY = true
+	self.camMan:setTarget(self.player:getComponent("physics"), 0, -150)
+	self.camMan:setPos(self.player:getComponent("physics").x,self.player:getComponent("physics").y-150)
+	self.camMan.lockY = true
 	
 	self.deathTimer = 2
 
@@ -151,7 +152,7 @@ function game:respawn()
 	self.levMan.carIndex = currentCar
 	self.levMan.currentCar = currentCar
   
-	self.player = self:addEnt(player, {x=0, y=100}, true)
+	self.player = self:addEnt(player, {x=50, y=150}, true)
 	
 	self.levMan:startLevel()
 	

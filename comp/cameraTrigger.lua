@@ -9,6 +9,7 @@ end
 
 function cameraTrigger:triggered() --TW: triggers
 	--TODO: set camera position
-	self.parent.game.camMan:setTargetPos(self.camx, self.camy)
+	self.parent.game.camMan:setTargetPos(self.camx, self.camy, 0, 0)
+	self.parent.game.camMan.lockY = false
 	self.parent.die = true
 end

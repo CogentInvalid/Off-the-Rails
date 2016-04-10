@@ -42,8 +42,9 @@ function cameraManager:setTarget(target, ox, oy)
 	self.targetOffset = {x=ox or 0, y=oy or 0}
 end
 
-function cameraManager:setTargetPos(x, y)
+function cameraManager:setTargetPos(x, y, ox, oy)
 	self.target = {x=x, y=y}
+	self.targetOffset = {x=ox or 0, y=oy or 0}
 end
 
 function cameraManager:setPos(x, y)
