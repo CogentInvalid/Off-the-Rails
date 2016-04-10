@@ -62,7 +62,7 @@ function game:init()
 	self.bggX2 = 2560
 	self.bggY2 = -730
 	
-	self.duckImg = getImg("Banana Duck")
+	self.duckImg = getImg("bananaduck")
 	self.duckAlpha = 0
 
 	--systems

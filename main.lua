@@ -21,6 +21,8 @@ require "debugger"
 
 function love.load()
 	
+	focus = true
+	
 	--setup ZeroBrane IDE debugger
 	if arg[#arg] == "-debug" then require("mobdebug").start() end
 	
@@ -31,8 +33,8 @@ function love.load()
   audioManager = audio:new()
 	
 	--TODO remove
-	courierCodeBold = love.graphics.newFont("/res/font/CourierCode-bold.ttf", 20)
-	courierCodeBoldBig = love.graphics.newFont("/res/font/CourierCode-bold.ttf", 60)
+	courierCodeBold = love.graphics.newFont("courier.ttf", 20)
+	courierCodeBoldBig = love.graphics.newFont("courier.ttf", 60)
 	love.graphics.setFont(courierCodeBold)
 
 	imgMan = imgManager:new() --tood: mayb remvov, replace to with cargo or love-loader
