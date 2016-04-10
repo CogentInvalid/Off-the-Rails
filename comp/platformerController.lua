@@ -113,7 +113,10 @@ function platformerController:update(dt)
 	end
 	
 	--doothify
-	if phys.y > 500 then self.parent.die = true end
+	if phys.y > 500 then
+		self.parent.die = true
+		self.parent.game.won = true
+	end
 	
 end
 

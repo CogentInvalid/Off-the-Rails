@@ -278,6 +278,7 @@ end
 
 function game:enter()
 	self:resize(love.graphics.getDimensions())
+	self:init()
 end
 
 function game:reset()

@@ -32,6 +32,7 @@ function love.load()
 	
 	--TODO remove
 	courierCodeBold = love.graphics.newFont("/res/font/CourierCode-bold.ttf", 20)
+	courierCodeBoldBig = love.graphics.newFont("/res/font/CourierCode-bold.ttf", 60)
 	love.graphics.setFont(courierCodeBold)
 
 	imgMan = imgManager:new() --tood: mayb remvov, replace to with cargo or love-loader
