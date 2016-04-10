@@ -110,6 +110,9 @@ function platformerController:update(dt)
 		self.reloadBar.a = self.reloadBar.a - (self.reloadBar.a)*10*dt
 	end
 	
+	--doothify
+	if phys.y > 500 then self.parent.die = true end
+	
 end
 
 function platformerController:jump()
