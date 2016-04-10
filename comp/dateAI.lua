@@ -8,7 +8,7 @@ function dateAI:initialize(args)
 	self.shotTimer = 0.05
 	self.friendly = false
 	self.actions = {["shoot"]=2.2, ["jump"]=1, ["swap"]=1}
-	self.currentAction = lume.weightedchoice(self.actions)
+	self.currentAction = "nothing"
 	self.actionTimer = 2
 	
 	self.side = 1
@@ -99,6 +99,10 @@ function dateAI:shoot(start)
 			end
 		end
 	end
+end
+
+function dateAI:nothing()
+	
 end
 
 function dateAI:jump(start)
