@@ -23,5 +23,5 @@ end
 
 function bullet:update(dt)
 	gameObject.update(self, dt)
-	self.game:addEnt(particle, {x=self.phys.x, y=self.phys.y, w=10, h=6})
+	--self.game:addEnt(particle, {x=self.phys.x, y=self.phys.y, w=10, h=6})
 end
