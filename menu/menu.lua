@@ -8,6 +8,7 @@ end
 function menu:enter()
 	love.graphics.setBackgroundColor(0,0,20)
 	self.ang = 0
+	love.mouse.setPosition(1024/2, 768/2-250)
 end
 
 function menu:update(dt)
