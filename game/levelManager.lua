@@ -11,7 +11,6 @@ function levelManager:initialize(parent)
 end
 
 function levelManager:update()
-	debug(self.currentCar .. ", " .. self.carIndex)
 end
 
 function levelManager:startLevel()

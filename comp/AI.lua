@@ -65,7 +65,7 @@ function Ai:walkForward(start)
 	if self:targetVisible() and self:distToPlayer() > 150 then
 		local dir = 1
 		if self.phys.x > self.target.x then dir = -1 end
-		self.phys:addVel(-(self.phys.vx-(150*dir))*5*dt, 0)
+		self.phys:addVel(-(self.phys.vx-(170*dir))*5*dt, 0)
 	end
 	end
 end

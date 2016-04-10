@@ -15,6 +15,7 @@ function platformerController:initialize(args)
 	self.dodgeCooldown = 0.8
 	self.canDodge = true
 	
+	self.hasWeapon = false
 	self.shootCooldown = 0
 	
 	self.reloadBar = self.parent:getComponentByName("reloadBar")
@@ -121,7 +122,7 @@ function platformerController:jump()
 end
 
 function platformerController:shoot()
-	if self.shootCooldown <= 0 then
+	if self.shootCooldown <= 0 and self.hasWeapon then
 		self.parent.game:addEnt(bullet, {x=self.phys.x+self.phys.w/2, y=self.phys.y+self.phys.h/2, vx=self.dir, friendly=true})
 		self.parent.game.camMan.screenshake = 0.2
 		self.shootCooldown = 1.2
@@ -138,5 +139,9 @@ function platformerController:collisionDetected(col)
 	if col.other.parent.id == "trigger" then
 		--col.other.parent:getComponentByName("trigger"):triggered()
 		col.other.parent:notifyComponents("triggered")
+	end
+	if col.other.parent.id == "weapon" then
+		self.hasWeapon = true
+		col.other.parent.die = true
 	end
 end
