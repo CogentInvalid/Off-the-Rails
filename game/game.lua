@@ -42,10 +42,14 @@ function game:init()
 	self.bg_sky_image = love.graphics.newImage("res/img/nightSky.jpg")
 	self.bgX1 = 0
 	self.bgY1 = 0
-	self.bgX2 = 2560
+	self.bgX2 = 2560/2
 	self.bgY2 = 0
   
   self.bg_ground_image = love.graphics.newImage("res/img/groundBackground.png")
+	self.bggX1 = 0
+	self.bggY1 = 0
+	self.bggX2 = 2560/2
+	self.bggY2 = 0
 
 	--systems
 	self.system = {}
@@ -164,9 +168,14 @@ function game:update(delta)
 	while accum >= dt do
 		
 		self.bgX1 = self.bgX1 - 100*dt
-		if self.bgX1 < -2560 then self.bgX1 = self.bgX1 + 2560*2 end
+		if self.bgX1 < -2560/2 then self.bgX1 = self.bgX1 + 2560 end
 		self.bgX2 = self.bgX2 - 100*dt
-		if self.bgX2 < -2560 then self.bgX2 = self.bgX2 + 2560*2 end
+		if self.bgX2 < -2560/2 then self.bgX2 = self.bgX2 + 2560 end
+		
+		self.bggX1 = self.bggX1 - 200*dt
+		if self.bggX1 < -2560/2 then self.bggX1 = self.bggX1 + 2560 end
+		self.bggX2 = self.bggX2 - 200*dt
+		if self.bggX2 < -2560/2 then self.bggX2 = self.bggX2 + 2560 end
 
 		--reverse iterate entities
 		for i, entity in lume.ripairs(self.ent) do
@@ -201,11 +210,11 @@ function game:draw()
   
   love.graphics.setColor(255,255,255)  
 
-  love.graphics.draw(self.bg_sky_image, self.bgX1, self.bgY1)
-	love.graphics.draw(self.bg_sky_image, self.bgX2, self.bgY2) 
+  love.graphics.draw(self.bg_sky_image, self.bgX1, self.bgY1, 0, 0.5, 0.5)
+	love.graphics.draw(self.bg_sky_image, self.bgX2, self.bgY2, 0, 0.5, 0.5) 
   
-  love.graphics.draw(self.bg_ground_image, self.bgX1, self.bgY1)
-	love.graphics.draw(self.bg_ground_image, self.bgX2, self.bgY2) 
+  love.graphics.draw(self.bg_ground_image, self.bggX1, self.bggY1, 0, 0.5, 0.5)
+	love.graphics.draw(self.bg_ground_image, self.bggX2, self.bggY2, 0, 0.5, 0.5) 
   
 	--attach camera
 	self.camMan.cam:attach()
