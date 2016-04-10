@@ -12,9 +12,9 @@ function menu:update(dt)
 end
 
 function menu:draw()
-	love.graphics.setColor(255,255,255)
-	local w = love.graphics.getFont():getWidth("THIS IS SOME SORTA MENU SCREEN")
-	love.graphics.print("THIS IS SOME SORTA MENU SCREEN", love.graphics.getWidth()/2-w/2, 350)
+	love.graphics.setColor(0,115,255)
+	local w = love.graphics.getFont():getWidth("life is like a deep pool")
+	love.graphics.print("life is like a deep pool", love.graphics.getWidth()/2-w/2, 350)
 end
 
 function menu:keypressed(key)
