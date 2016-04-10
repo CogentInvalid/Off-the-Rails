@@ -220,8 +220,6 @@ function game:init()
     {class = box, args={x=550, y=-68}},
     {class = enemy, args = {x=400, y=150, w=500, h=50}},
 		{class = enemySpawner, args={side=0, delay=3}},
-    {class = enemy, args = {x=400, y=150, w=500, h=50}},
-    {class = enemy, args = {x=400, y=150, w=500, h=50}},
 		{class = enemySpawner, args={side=1, delay=2}},  
   }
   
@@ -255,7 +253,7 @@ function game:init()
   }
   
     self.trainCars[17].ents = {
-    {class = instructions, args={x=100, y=-200, text="There is she!\n Your love!\n...Your FINAL love...", delay=1}},
+    {class = instructions, args={x=100, y=-200, text="There she is!\n Your love!\n...Your FINAL love...", delay=1}},
     {class = date, args = {x=610, y=150, w=500, h=50}}
   }
   
