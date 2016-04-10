@@ -14,7 +14,7 @@ function dateAI:initialize(args)
 	self.side = 1
 	
 	self.active = false
-	self.dodging = true
+	self.dodging = false
 	self.shooting = false
 	
 	self.dodgeTimer = 0
@@ -49,6 +49,10 @@ function dateAI:update(dt)
 	if self.shooting and self.dodging then
 		r = 80; g = 40; b = 40
 	end
+	local rect = self.parent:getComponent("rectangle")
+	rect.r = rect.r - (rect.r-r)*10*dt
+	rect.g = rect.g - (rect.g-g)*10*dt
+	rect.b = rect.b - (rect.b-b)*10*dt
 	
 	self.phys:addVel(-(self.phys.vx)*3*dt, 0)
 end
@@ -86,9 +90,16 @@ function dateAI:jump(start)
 		self.phys.y = self.phys.y - 4
 	else
 		self.shotTimer = self.shotTimer - dt
+		if self.actionTimer > 1 and self.actionTimer < 1.3 then
+			self.shooting = true
+		end
 		if self.actionTimer < 1 and self.actionTimer > 0.5 and self.shotTimer <= 0 then
 			self.shotTimer = 0.05
 			self:shootPlayer()
+			self.shooting = true
+		end
+		if self.actionTimer < 0.5 then
+			self.shooting = false
 		end
 	end
 end
