@@ -10,9 +10,14 @@ function enemy:initialize(args)
 	local phys = physics:new({parent=self, x=x, y=y, w=50, h=100, gravity=true})
 
 	local rect = rectangle:new({parent=self, posParent=phys, w=50, h=100, r=200, g=50, b=50})
-		
+    
 	self:addComponent(phys)
 	self:addComponent(rect)
 	self:addComponent(person:new({parent=self, friendly=false}))
 	self:addComponent(Ai:new({parent=self, target=self.game.player:getComponent("physics")}))
+  
+  if ( args.fadeOut == true ) then
+    self:addComponent(fadeOut:new({parent=self, delay=args.fadeOutDelay}))
+  end
+  
 end

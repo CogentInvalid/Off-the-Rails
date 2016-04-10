@@ -13,6 +13,11 @@ function enemySpawner:initialize(args)
 	self:addComponent(self.phys)
 	
 	self.delay = args.delay
+  
+  if ( args.fadeOut == true ) then
+    self.fadeOut = true
+    self.fadeOutDelay = args.fadeOutDelay
+  end
 end
 
 function enemySpawner:update(dt)
@@ -20,7 +25,7 @@ function enemySpawner:update(dt)
 	if self.active then
 		self.delay = self.delay - dt
 		if self.delay < 0 then
-			local enemy = self.game:addEnt(enemy, {x=self.phys.x, y=self.phys.y})
+			local enemy = self.game:addEnt(enemy, {x=self.phys.x, y=self.phys.y, fadeOut = self.fadeOut, fadeOutDelay = self.fadeOutDelay})
 			enemy:getComponent("Ai").active = true
 			enemy:getComponent("Ai").currentAction = "walkForward"
 			if self.shootSoon then enemy:getComponent("Ai").nextAction = "shoot" end

@@ -35,6 +35,7 @@ require "comp/trainCarTrigger"
 require "comp/wallTrigger"
 require "comp/destroyOffscreen"
 require "comp/rotate"
+require "comp/fadeOut"
 
 local game = {}
 
@@ -84,6 +85,8 @@ function game:init()
   self.trainCars[8] = trainCar:new()
   self.trainCars[9] = trainCar:new()
   self.trainCars[10] = trainCar:new()
+  self.trainCars[11] = trainCar:new()
+  self.trainCars[12] = trainCar:new()
   
   
   self.trainCars[1].ents = {
@@ -142,16 +145,39 @@ function game:init()
     {class = enemySpawner, args={side=0, delay=4}},
     {class = enemySpawner, args={side=1, delay=4.5}}
   }
+    
+  self.trainCars[10].ents = {
+		{class = instructions, args={x=100, y=-200, text="Where did they go??", delay=4}},
+		{class = box, args={x=200, y=200}},  
+		{class = enemySpawner, args={side=1, delay=1, fadeOut=true, fadeOutDelay=2}},
+		{class = enemySpawner, args={side=1, delay=2, fadeOut=true, fadeOutDelay=1.5}},
+		{class = enemySpawner, args={side=1, delay=3, fadeOut=true, fadeOutDelay=1}},
+		{class = enemySpawner, args={side=1, delay=4, fadeOut=true, fadeOutDelay=0.5}}
+  }
   
-	self.trainCars[10].ents = {
-		{class = instructions, args={x=100, y=-200, text="put a text here"}},
-		{class = box, args={x=200, y=200}},
-		{class = enemy, args = {x=650, y=150, w=500, h=50}},
+    self.trainCars[11].ents = {
+		{class = instructions, args={x=100, y=-200, text="Come at me!", delay=1}},    
+		{class = enemySpawner, args={side=1, delay=1}},
 		{class = enemySpawner, args={side=1, delay=2}},
 		{class = enemySpawner, args={side=1, delay=3}},
-		{class = enemySpawner, args={side=1, delay=4}},
-		{class = enemySpawner, args={side=1, delay=5.5}},
-  }  
+		{class = enemySpawner, args={side=1, delay=4}}
+  }
+  
+    self.trainCars[12].ents = {
+    {class = instructions, args={x=100, y=-200, text="Oh this is interesting", delay=1}},
+    {class = box, args={x=200, y=200}},
+    {class = box, args={x=250, y=200}},
+    {class = box, args={x=300, y=200}},
+    {class = box, args={x=250, y=150}},
+    {class = box, args={x=300, y=150}},
+    {class = box, args={x=300, y=100}},
+		{class = enemySpawner, args={side=1, delay=1}},
+		{class = enemySpawner, args={side=1, delay=2}},
+		{class = enemySpawner, args={side=1, delay=3}}
+  }
+
+  
+  
 	
 	self.levMan:startLevel()
   
@@ -185,8 +211,8 @@ function game:respawn()
 	self.ent = {}
 	
 	self.levMan = self:addSystem(levelManager)
-	self.levMan.carIndex = currentCar
-	self.levMan.currentCar = currentCar
+	self.levMan.carIndex =  12--currentCar
+	self.levMan.currentCar = 12--currentCar
   
 	self.player = self:addEnt(player, {x=50, y=150}, true)
 	self.player:getComponent("platformerController").hasWeapon = true
