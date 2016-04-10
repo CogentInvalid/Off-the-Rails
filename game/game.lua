@@ -32,6 +32,7 @@ require "comp/cameraTrigger"
 require "comp/trainCarTrigger"
 require "comp/wallTrigger"
 require "comp/destroyOffscreen"
+require "comp/rotate"
 
 local game = {}
 

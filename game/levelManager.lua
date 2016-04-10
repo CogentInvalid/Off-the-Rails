@@ -24,6 +24,22 @@ function levelManager:loadTrainCar()
 	--background
 	self:addToCar(i, self.parent:addEnt(background, {x=self.rightSide-122, y=-330, img="trainCar", sx=0.41, sy=0.5}, true))
 	
+	--wheels
+	local wheel = self.parent:addEnt(background, {x=self.rightSide, y=250, img="trainCarWheels", sx=0.1, sy=0.1, ox=500, oy=500, offx=50, offy=50}, true)
+	wheel:addComponent(rotate:new({parent=wheel, speed=0.1}))
+	self:addToCar(i, wheel)
+	wheel = self.parent:addEnt(background, {x=self.rightSide+100, y=250, img="trainCarWheels", sx=0.1, sy=0.1, ox=500, oy=500, offx=50, offy=50}, true)
+	wheel:addComponent(rotate:new({parent=wheel, speed=0.1}))
+	self:addToCar(i, wheel)
+	
+	wheel = self.parent:addEnt(background, {x=self.rightSide+600, y=250, img="trainCarWheels", sx=0.1, sy=0.1, ox=500, oy=500, offx=50, offy=50}, true)
+	wheel:addComponent(rotate:new({parent=wheel, speed=0.1}))
+	self:addToCar(i, wheel)
+	wheel = self.parent:addEnt(background, {x=self.rightSide+600+100, y=250, img="trainCarWheels", sx=0.1, sy=0.1, ox=500, oy=500, offx=50, offy=50}, true)
+	wheel:addComponent(rotate:new({parent=wheel, speed=0.1}))
+	self:addToCar(i, wheel)
+	
+	
 	--load walls into self.cars[i]
 	self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide, y=250, w=800, h=20}, true)) --floor
 	self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide, y=250, w=800, h=20}, true)) --floor
