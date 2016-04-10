@@ -93,6 +93,7 @@ function game:init()
   self.trainCars[14] = trainCar:new()
   self.trainCars[15] = trainCar:new()
   self.trainCars[16] = trainCar:new()
+  self.trainCars[17] = trainCar:new()
   
   
   self.trainCars[1].ents = {
@@ -243,22 +244,22 @@ function game:init()
   }
   
     self.trainCars[16].ents = {
-    {class = instructions, args={x=100, y=-200, text="What?", delay=1}},
-    {class = box, args={x=100, y=40}},
-    {class = box, args={x=200, y=40}},
-    {class = box, args={x=300, y=40}},
-    {class = box, args={x=400, y=40}},
-    {class = box, args={x=500, y=40}},
-    {class = box, args={x=600, y=40}},
-    {class = box, args={x=700, y=40}},
-    {class = enemy, args = {x=100, y=-60, w=500, h=50}},
-    {class = enemy, args = {x=200, y=-60, w=500, h=50}},
-    {class = enemy, args = {x=300, y=-60, w=500, h=50}},
-    {class = enemy, args = {x=400, y=-60, w=500, h=50}},
-    {class = enemy, args = {x=500, y=-60, w=500, h=50}},
-    {class = enemy, args = {x=600, y=-60, w=500, h=50}},
-    {class = enemy, args = {x=700, y=-60, w=500, h=50}},
+    {class = instructions, args={x=100, y=-200, text="What?", delay=3.5}},
+    {class = enemySpawner, args={side=1, delay=1, fadeOut=true, fadeOutDelay=1}},
+    {class = enemySpawner, args={side=1, delay=2, fadeOut=true, fadeOutDelay=1}},
+    {class = enemySpawner, args={side=0, delay=1, fadeOut=true, fadeOutDelay=1}},
+    {class = enemySpawner, args={side=0, delay=2, fadeOut=true, fadeOutDelay=1}},
+    {class = enemy, args = {x=500, y=150, w=500, h=50, fadeOut=true, fadeOutDelay=2}},
+    {class = enemy, args = {x=600, y=150, w=500, h=50, fadeOut=true, fadeOutDelay=2}},
+    {class = enemy, args = {x=700, y=150, w=500, h=50, fadeOut=true, fadeOutDelay=2}},
   }
+  
+    self.trainCars[17].ents = {
+    {class = instructions, args={x=100, y=-200, text="There is she!\n Your love!\n...Your FINAL love...", delay=1}},
+    {class = date, args = {x=610, y=150, w=500, h=50}}
+  }
+  
+  
   
 	
 	self.levMan:startLevel()
@@ -294,8 +295,8 @@ function game:respawn()
 	
 	self.levMan = self:addSystem(levelManager)
 
-	self.levMan.carIndex =  currentCar
-	self.levMan.currentCar = currentCar
+	self.levMan.carIndex =  16--currentCar
+	self.levMan.currentCar = 16--currentCar
   
 	self.player = self:addEnt(player, {x=50, y=150}, true)
 	self.player:getComponent("platformerController").hasWeapon = true
