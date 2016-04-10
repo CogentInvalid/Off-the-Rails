@@ -21,6 +21,8 @@ function levelManager:loadTrainCar()
 	local i = #self.cars+1
 	self.cars[i] = {}
 	
+	local trainCar = self.parent.trainCars[self.carIndex]
+	
 	--background
 	self:addToCar(i, self.parent:addEnt(background, {x=self.rightSide-122, y=-330, img="trainCar", sx=0.41, sy=0.5}, true))
 	self:addToCar(i, self.parent:addEnt(background, {x=self.rightSide-122, y=220, img="trainChain", sx=0.2, sy=0.2}, true))
@@ -44,7 +46,11 @@ function levelManager:loadTrainCar()
 	--load walls into self.cars[i]
 	self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide, y=250, w=800, h=20}, true)) --floor
 	self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide, y=250, w=800, h=20}, true)) --floor
-	self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide, y=-100, w=800, h=20}, true)) --ceiling
+	
+	if not trainCar.openCeiling then
+		self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide, y=-100, w=800, h=20}, true)) --ceiling
+	end
+	
 	self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide, y=-100, w=20, h=200}, true)) --left wall
 	self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide+780, y=-100, w=20, h=200}, true)) --right wall
 	
@@ -68,7 +74,6 @@ function levelManager:loadTrainCar()
 	wTrigger:addComponent(wallTrigger:new({parent=wTrigger, x=self.rightSide, y=0}))
 	
 	--load trainCar
-	local trainCar = self.parent.trainCars[self.carIndex]
 	for q, entity in ipairs(trainCar.ents) do
 		local ent = self.parent:addEnt(entity.class, entity.args, true)
 		ent:notifyComponents("offset", {x=self.rightSide, y=0})
