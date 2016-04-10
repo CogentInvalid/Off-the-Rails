@@ -83,9 +83,10 @@ function game:init()
   self.trainCars[7] = trainCar:new()
   self.trainCars[8] = trainCar:new()
   self.trainCars[9] = trainCar:new()
+  self.trainCars[10] = trainCar:new()
   
   self.trainCars[1].ents = {
-    {class = instructions, args={x=100, y=-200, text="Your date is waiting on you. Dinner will be served.\nEventually.\nUse the arrow keys to move yourself already"}},
+    {class = instructions, args={x=100, y=-200, text="Your lovely date is waiting on you. Dinner will be served.\nEventually.\nUse the arrow keys to move yourself already"}}
   }
   
   self.trainCars[2].ents = {
@@ -119,20 +120,29 @@ function game:init()
 	{class = enemySpawner, args={side=0, delay=1.8}},
 	{class = enemySpawner, args={side=1, delay=2.8}},
 	{class = enemySpawner, args={side=0, delay=4}},
-	{class = enemySpawner, args={side=1, delay=4}},
-  }
-  
+	{class = enemySpawner, args={side=1, delay=4}}
+}
+
+
   self.trainCars[8].ents = {
+    {class = instructions, args={x=100, y=-200, text="Who are they? Why are they attacking you?"}},
+    {class = enemy, args = {x=600, y=150, w=500, h=50}},
+	{class = enemySpawner, args={side=1, delay=1.8}},
+	{class = enemySpawner, args={side=1, delay=2.8}}
+}
+
+  
+  self.trainCars[9].ents = {
     {class = instructions, args={x=100, y=-200, text="People? What people?"}},
     {class = enemy, args = {x=600, y=150, w=500, h=50}},
-	{class = enemySpawner, args={side=0, delay=1.8}},
-	{class = enemySpawner, args={side=0, delay=3}},
-	{class = enemySpawner, args={side=1, delay=3}},
-	{class = enemySpawner, args={side=0, delay=4}},
-	{class = enemySpawner, args={side=1, delay=4.5}},
+    {class = enemySpawner, args={side=0, delay=1.8}},
+    {class = enemySpawner, args={side=0, delay=3}},
+    {class = enemySpawner, args={side=1, delay=3}},
+    {class = enemySpawner, args={side=0, delay=4}},
+    {class = enemySpawner, args={side=1, delay=4.5}}
   }
   
-	self.trainCars[9].ents = {
+	self.trainCars[10].ents = {
 		{class = instructions, args={x=100, y=-200, text="put a text here"}},
 		{class = box, args={x=200, y=200}},
 		{class = enemy, args = {x=650, y=150, w=500, h=50}},
