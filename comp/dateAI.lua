@@ -13,7 +13,7 @@ function dateAI:initialize(args)
 	
 	self.side = 1
 	
-	self.hp = 5
+	self.hp = 4
 	
 	self.active = false
 	self.shooting = false
@@ -172,7 +172,7 @@ function dateAI:collisionDetected(col)
 		if col.other.parent.friendly ~= self.friendly and col.other.inBackground == phys.inBackground then
 			self.hp = self.hp - 1
 			self.dodging = true
-			self.undodgeTimer = 8
+			self.undodgeTimer = 6
 			col.other.parent.die = true
 			audioManager:playAudio("bodyShotImpact")
 			
