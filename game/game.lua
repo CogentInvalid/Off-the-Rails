@@ -185,9 +185,9 @@ function game:update(delta)
 		self.bgX2 = self.bgX2 - 100*dt
 		if self.bgX2 < -2560/2 then self.bgX2 = self.bgX2 + 2560 end
 		
-		self.bggX1 = self.bggX1 - 200*dt
+		self.bggX1 = self.bggX1 - 400*dt
 		if self.bggX1 < -2560 then self.bggX1 = self.bggX1 + 2560*2 end
-		self.bggX2 = self.bggX2 - 200*dt
+		self.bggX2 = self.bggX2 - 400*dt
 		if self.bggX2 < -2560 then self.bggX2 = self.bggX2 + 2560*2 end
 
 		--reverse iterate entities

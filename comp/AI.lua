@@ -51,7 +51,13 @@ function Ai:shoot(start)
 	if start then self.actionTimer = 2 else
 	if self:targetVisible() then
 		self.shootTimer = self.shootTimer - dt
+		if self.shootTimer < 0.2 then
+			local rect = self.parent:getComponent("rectangle")
+			rect.g = 20; rect.b = 20
+		end
 		if self.shootTimer <= 0 then
+			local rect = self.parent:getComponent("rectangle")
+			rect.g = 50; rect.b = 50
 			self.shootTimer = 1.2
 			if math.random(6) == 1 then self.shootTimer = 0.3 end
 			self:shootPlayer()
