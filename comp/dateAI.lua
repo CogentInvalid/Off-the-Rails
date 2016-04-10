@@ -71,6 +71,8 @@ function dateAI:update(dt)
 	end
 	
 	self.phys:addVel(-(self.phys.vx)*3*dt, 0)
+	
+	--if love.keyboard.isDown("p") then self.parent.die = true; self.parent.game.won = true end
 end
 
 function dateAI:activate()
@@ -175,6 +177,7 @@ function dateAI:collisionDetected(col)
 			self.undodgeTimer = 6
 			col.other.parent.die = true
 			audioManager:playAudio("bodyShotImpact")
+			self.parent.game.won = true
 			
 			if self.hp <= 0 then
 				self.parent.die = true

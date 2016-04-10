@@ -73,8 +73,8 @@ function levelManager:loadTrainCar()
 	--load trigger
 	local camTrigger = self.parent:addEnt(trigger, {x=self.rightSide, y=50, w=200, h=200}, true) --trigger
 	self:addToCar(i, camTrigger)
-	camTrigger:addComponent(cameraTrigger:new({parent=camTrigger, camx=self.rightSide+400, camy=0}))
 	camTrigger:addComponent(trainCarTrigger:new({parent=camTrigger, car=self.cars[i], index = self.carIndex}))
+	camTrigger:addComponent(cameraTrigger:new({parent=camTrigger, camx=self.rightSide+400, camy=0}))
 	
 	--wall trigger
 	local wTrigger = self.parent:addEnt(trigger, {x=self.rightSide+70, y=50, w=200, h=200}, true) --trigger
@@ -89,7 +89,9 @@ function levelManager:loadTrainCar()
 	end
 	
 	self.rightSide = self.rightSide + 750 + 150
-	if self.parent.trainCars[self.carIndex+1] ~= nil then self.carIndex = self.carIndex + 1 end
+	if self.parent.trainCars[self.carIndex+1] ~= nil then
+		self.carIndex = self.carIndex + 1
+	end
 end
 
 function levelManager:addToCar(i, ent)
