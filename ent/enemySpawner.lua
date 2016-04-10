@@ -8,6 +8,8 @@ function enemySpawner:initialize(args)
 	if args.side == 1 then x = 850 end --TODO adjust
 	self.phys = physics:new({parent=self, x=x, y=150, w=1, h=1, col=false})
 	
+	self.shootSoon = args.shootSoon
+	
 	self:addComponent(self.phys)
 	
 	self.delay = args.delay
@@ -21,7 +23,8 @@ function enemySpawner:update(dt)
 			local enemy = self.game:addEnt(enemy, {x=self.phys.x, y=self.phys.y})
 			enemy:getComponent("Ai").active = true
 			enemy:getComponent("Ai").currentAction = "walkForward"
-			enemy:getComponent("Ai").actionTimer = 1
+			if self.shootSoon then enemy:getComponent("Ai").nextAction = "shoot" end
+			enemy:getComponent("Ai").actionTimer = 0.8
 			self.die = true
 		end
 	end

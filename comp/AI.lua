@@ -24,6 +24,10 @@ function Ai:update(dt)
 		self.actionTimer = self.actionTimer - dt
 		if self.actionTimer <= 0 then
 			self.currentAction = lume.weightedchoice(self.actions)
+			if self.nextAction ~= nil then
+				self.currentAction = self.nextAction
+				self.nextAction = nil
+			end
 			self[self.currentAction](self, true)
 		end
 	end
@@ -68,7 +72,7 @@ end
 
 function Ai:dodge(start)
 	if start then
-		self.actionTimer = math.random()*3+2
+		self.actionTimer = math.random()*2+1.5
 		self.dodgeTimer = self.actionTimer - 1
 		self.dodging = true
 	else
