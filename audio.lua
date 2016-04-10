@@ -9,7 +9,7 @@ function audio:setAudio(name)
   
   local source = love.audio.newSource("res/audio/"..name..".ogg")
   love.audio.play(source)
-  source.setLooping(true)
+  source:setLooping(true)
   
 end
 
