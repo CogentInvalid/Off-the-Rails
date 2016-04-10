@@ -13,7 +13,7 @@ function dateAI:initialize(args)
 	
 	self.side = 1
 	
-	self.hp = 4
+	self.hp = 5
 	
 	self.active = false
 	self.shooting = false
@@ -84,10 +84,10 @@ function dateAI:shoot(start)
 	else
 		if self:targetVisible() then
 			self.shotTimer = self.shotTimer - dt
-			if self.actionTimer > 0.9 and self.actionTimer < 1.2 then
+			if self.actionTimer > 0.8 and self.actionTimer < 1.2 then
 				self.shooting = true
 			end
-			if self.shotTimer <= 0 and self.actionTimer < 0.9 and self.actionTimer > 0.4 then
+			if self.shotTimer <= 0 and self.actionTimer < 0.8 and self.actionTimer > 0.4 then
 				self.shooting = true
 				self.shotTimer = 0.05
 				self:shootPlayer()
@@ -106,10 +106,10 @@ function dateAI:jump(start)
 		self.phys.y = self.phys.y - 4
 	else
 		self.shotTimer = self.shotTimer - dt
-		if self.actionTimer > 1 and self.actionTimer < 1.3 then
+		if self.actionTimer > 0.9 and self.actionTimer < 1.3 then
 			self.shooting = true
 		end
-		if self.actionTimer < 1 and self.actionTimer > 0.5 and self.shotTimer <= 0 then
+		if self.actionTimer < 0.9 and self.actionTimer > 0.5 and self.shotTimer <= 0 then
 			self.shotTimer = 0.05
 			self:shootPlayer()
 			self.shooting = true
