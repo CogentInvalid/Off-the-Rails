@@ -15,7 +15,6 @@ function physics:initialize(args)
 	self.vx = 0
 	self.vy = 0
 	
-	--gravity not yet implemented
 	self.gravity = args.gravity or false
 	self.gravScale = args.gravScale or 300
 	self.onGround = nil

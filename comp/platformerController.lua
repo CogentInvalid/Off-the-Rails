@@ -15,6 +15,8 @@ function platformerController:initialize(args)
 	self.dodgeCooldown = 0.8
 	self.canDodge = true
 	
+	self.shootCooldown = 0
+	
 	self.phys = self.parent:getComponent("physics")
 end
 
@@ -96,6 +98,11 @@ function platformerController:update(dt)
 		end
 	end
 	
+	--shoot cooldown
+	if self.shootCooldown > 0 then
+		self.shootCooldown = self.shootCooldown - dt
+	end
+	
 end
 
 function platformerController:jump()
@@ -103,8 +110,11 @@ function platformerController:jump()
 end
 
 function platformerController:shoot()
-	self.parent.game:addEnt(bullet, {x=self.phys.x+self.phys.w/2, y=self.phys.y+self.phys.h/2, vx=self.dir, friendly=true})
-	self.parent.game.camMan.screenshake = 0.2
+	if self.shootCooldown <= 0 then
+		self.parent.game:addEnt(bullet, {x=self.phys.x+self.phys.w/2, y=self.phys.y+self.phys.h/2, vx=self.dir, friendly=true})
+		self.parent.game.camMan.screenshake = 0.2
+		self.shootCooldown = 1
+	end
 end
 
 function platformerController:sideHit(args)
