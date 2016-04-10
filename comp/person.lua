@@ -11,6 +11,7 @@ function person:collisionDetected(col)
 		if col.other.parent.friendly ~= self.friendly and col.other.inBackground == phys.inBackground then
 			self.parent.die = true
 			col.other.parent.die = true
+      audioManager:playAudio("bodyShotImpact")
 			
 			local phys = col.other.parent:getComponent("physics")
 			local dir = 1

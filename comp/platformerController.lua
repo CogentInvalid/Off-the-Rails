@@ -144,6 +144,6 @@ function platformerController:collisionDetected(col)
 	if col.other.parent.id == "weapon" then
 		self.hasWeapon = true
 		col.other.parent.die = true
-    audioManager:playAudio("gunShot")
+    audioManager:playAudio("gunCock")
 	end
 end
