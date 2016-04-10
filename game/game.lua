@@ -87,6 +87,7 @@ function game:init()
   self.trainCars[10] = trainCar:new()
   self.trainCars[11] = trainCar:new()
   self.trainCars[12] = trainCar:new()
+  self.trainCars[13] = trainCar:new()
   
   
   self.trainCars[1].ents = {
@@ -164,18 +165,35 @@ function game:init()
   }
   
     self.trainCars[12].ents = {
-    {class = instructions, args={x=100, y=-200, text="Oh this is interesting", delay=1}},
+    {class = instructions, args={x=100, y=-200, text="Oh yeah", delay=1}},
     {class = box, args={x=200, y=200}},
     {class = box, args={x=250, y=200}},
     {class = box, args={x=300, y=200}},
     {class = box, args={x=250, y=150}},
     {class = box, args={x=300, y=150}},
     {class = box, args={x=300, y=100}},
+    {class = box, args={x=300, y=100}},
 		{class = enemySpawner, args={side=1, delay=1}},
 		{class = enemySpawner, args={side=1, delay=2}},
 		{class = enemySpawner, args={side=1, delay=3}}
   }
 
+    self.trainCars[13].ents = {
+    {class = instructions, args={x=100, y=-200, text="Oh yeah", delay=1}},
+    {class = box, args={x=200, y=200}},
+    {class = box, args={x=250, y=200}},
+    {class = box, args={x=300, y=200}},
+    {class = box, args={x=250, y=150}},
+    {class = box, args={x=450, y=200}},
+    {class = box, args={x=500, y=200}},
+    {class = box, args={x=550, y=200}},
+    {class = box, args={x=500, y=150}},
+    {class = enemy, args = {x=400, y=150, w=500, h=50}},
+		{class = enemySpawner, args={side=0, delay=3}},
+    {class = enemySpawner, args={side=0, delay=5}},
+		{class = enemySpawner, args={side=1, delay=2}},
+		{class = enemySpawner, args={side=1, delay=4}}
+  }
   
   
 	
@@ -211,8 +229,8 @@ function game:respawn()
 	self.ent = {}
 	
 	self.levMan = self:addSystem(levelManager)
-	self.levMan.carIndex =  12--currentCar
-	self.levMan.currentCar = 12--currentCar
+	self.levMan.carIndex =  14--currentCar
+	self.levMan.currentCar = 13--currentCar
   
 	self.player = self:addEnt(player, {x=50, y=150}, true)
 	self.player:getComponent("platformerController").hasWeapon = true
