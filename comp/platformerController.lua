@@ -113,9 +113,12 @@ function platformerController:update(dt)
 	end
 	
 	--doothify
-	if phys.y > 500 then
+	if phys.y > 4000 then
 		self.parent.die = true
 		self.parent.game.won = true
+	end
+	if phys.y > 800 then
+		self.parent.game.duck = true
 	end
 	
 	if love.keyboard.isDown("l") then self.phys.vx = 5000 end

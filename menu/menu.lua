@@ -1,12 +1,13 @@
 local menu = {}
 
 function menu:init()
-	
+	self.duck = getImg("ducktective")
 end
 
 function menu:enter()
 	love.graphics.setBackgroundColor(0,0,20)
 	self.ang = 0
+	
 end
 
 function menu:update(dt)
@@ -19,6 +20,10 @@ function menu:draw()
 	local w = love.graphics.getFont():getWidth("Off the Rails")
 	love.graphics.print("Off the Rails", love.mouse.getX()+math.sin(self.ang*2)*200-w/2, love.mouse.getY()-40, 0)
 	love.graphics.setFont(courierCodeBold)
+	w = love.graphics.getFont():getWidth("Press Enter")
+	love.graphics.print("Press Enter", love.mouse.getX()+math.sin(self.ang*2)*200-w/2, love.mouse.getY()+40, 0)
+	love.graphics.setColor(255,255,255)
+	love.graphics.draw(self.duck, love.mouse.getX(), love.mouse.getY()-800, 0, 0.2, 0.2)
 end
 
 function menu:keypressed(key)

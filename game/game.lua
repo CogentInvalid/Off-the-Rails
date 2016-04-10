@@ -61,6 +61,9 @@ function game:init()
 	self.bggY1 = -730
 	self.bggX2 = 2560
 	self.bggY2 = -730
+	
+	self.duckImg = getImg("Banana Duck")
+	self.duckAlpha = 0
 
 	--systems
 	self.system = {}
@@ -388,6 +391,12 @@ function game:draw()
 		for i, phys in ipairs(cols) do
 			love.graphics.rectangle("fill", phys.x, phys.y, phys.w, phys.h)
 		end
+	end
+	
+	if self.duck then
+		self.duckAlpha = self.duckAlpha + 20*dt
+		love.graphics.setColor(255,255,255,self.duckAlpha)
+		love.graphics.draw(self.duckImg, -60, 150)
 	end
 	
 	--detach camera
