@@ -10,13 +10,18 @@ function bullet:initialize(args)
 	local vy = args.vy or 0
 	local speed = 2000
 	if self.friendly == false then speed = 800 end
-	local phys = physics:new({parent=self, x=args.x, y=args.y, w=6, h=6, col=false})
-	phys.vx = speed*vx
-	phys.vy = speed*vy
+	self.phys = physics:new({parent=self, x=args.x, y=args.y, w=6, h=6, col=true})
+	self.phys.vx = speed*vx
+	self.phys.vy = speed*vy
 	
-	local rect = rectangle:new({parent=self, w=6, h=6, posParent=phys})
+	local rect = rectangle:new({parent=self, w=6, h=6, posParent=self.phys})
 	
 	self:addComponent(rect)
-	self:addComponent(phys)
+	self:addComponent(self.phys)
 	self:addComponent(destroyOffscreen:new({parent=self}))
+end
+
+function bullet:update(dt)
+	gameObject.update(self, dt)
+	self.game:addEnt(particle, {x=self.phys.x, y=self.phys.y, w=10, h=6})
 end

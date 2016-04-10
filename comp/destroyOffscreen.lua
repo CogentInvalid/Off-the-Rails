@@ -5,6 +5,7 @@ function destroyOffscreen:initialize(args)
 	self.type = "destroyOffscreen"
 	
 	self.phys = self.parent:getComponent("physics")
+	self.phys.collideOrder = {}
 end
 
 function destroyOffscreen:update(dt)
@@ -12,6 +13,12 @@ function destroyOffscreen:update(dt)
 	local border = 550
 	if self.phys.x > cam.x + border or self.phys.x < cam.x - border
 	or self.phys.y > cam.y + border or self.phys.y < cam.y - border then
+		self.parent.die = true
+	end
+end
+
+function destroyOffscreen:collisionDetected(col)
+	if col.other.parent.id == "box" then
 		self.parent.die = true
 	end
 end
