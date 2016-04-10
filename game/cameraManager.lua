@@ -7,7 +7,7 @@ function cameraManager:initialize(parent)
 	self.target = nil
 	
 	self.x = self.cam.x; self.y = self.cam.y
-	self.followSpeed = 3
+	self.followSpeed = 5
 	
 	self.screenshake = 0
 	

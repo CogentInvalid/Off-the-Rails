@@ -90,12 +90,12 @@ function game:init()
   
   self.trainCars[3].ents = {
     {class = instructions, args={x=100, y=-200, text="Kill it. Kill it.\nIt can't stand between you and your date.\nPress X to kill"}},
-    {class = enemy, args = {x=600, y=50, w=500, h=50}}
+    {class = enemy, args = {x=600, y=150, w=500, h=50}}
   }
   
   self.trainCars[4].ents = {
     {class = instructions, args={x=100, y=-200, text="They are coming after you."}},
-    {class = enemy, args = {x=600, y=50, w=500, h=50}},
+    {class = enemy, args = {x=600, y=150, w=500, h=50}},
   }
   
   self.trainCars[5].ents = {
@@ -105,22 +105,22 @@ function game:init()
   
   self.trainCars[6].ents = {
     {class = instructions, args={x=100, y=-200, text="There are a few losers here.\nDeal with them."}},
-    {class = enemy, args = {x=600, y=50, w=500, h=50}}, {class = enemy, args = {x=540, y=50, w=500, h=50}}, {class = enemy, args = {x=480, y=50, w=500, h=50}}
+    {class = enemy, args = {x=600, y=150, w=500, h=50}}, {class = enemy, args = {x=540, y=50, w=500, h=50}}, {class = enemy, args = {x=480, y=50, w=500, h=50}}
   }
   
   self.trainCars[7].ents = {
     {class = instructions, args={x=100, y=-200, text="Don't kill people.\nWhy would you?\nWhat would your lady think of you?"}},
-    {class = enemy, args = {x=600, y=50, w=500, h=50}}
+    {class = enemy, args = {x=600, y=150, w=500, h=50}}
   }
   
   self.trainCars[8].ents = {
     {class = instructions, args={x=100, y=-200, text="People? What people?"}},
-    {class = enemy, args = {x=600, y=50, w=500, h=50}}
+    {class = enemy, args = {x=600, y=150, w=500, h=50}}
   }
   
   self.trainCars[9].ents = {
     {class = instructions, args={x=100, y=-200, text="Don't kill people.\nWhy would you?\nWhat would your lady think of you?"}},
-    {class = enemy, args = {x=600, y=50, w=500, h=50}}
+    {class = enemy, args = {x=600, y=150, w=500, h=50}}
   }
 	
 	self.levMan:startLevel()

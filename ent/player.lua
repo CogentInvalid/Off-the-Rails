@@ -14,7 +14,6 @@ function player:initialize(args)
 
 	local rect = rectangle:new({parent=self, w=50, h=100, posParent=phys, r=100, g=100, b=200, drawLayer="player"})
 	
-	--local controller = topDownController:new({parent=self})
 	local controller = platformerController:new({parent=self})
 	
 	self:addComponent(controller)
