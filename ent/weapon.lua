@@ -11,10 +11,9 @@ function weapon:initialize(args)
   
   
   local phys = physics:new({parent=self, x=x, y=y, w=w, h=h})
-  local rect = rectangle:new({parent=self, w=w, h=w, posParent=phys, r=200, g=200, b=200})
-  
-  
-  self:addComponent(rect)
+  local img = image:new({parent=self, img="gun", sx=0.4, sy=0.4, posParent=phys})
+	
+	self:addComponent(img)
   self:addComponent(phys)
   
 end
