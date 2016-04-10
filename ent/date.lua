@@ -13,7 +13,6 @@ function date:initialize(args)
     
 	self:addComponent(phys)
 	self:addComponent(rect)
-	self:addComponent(person:new({parent=self, friendly=false}))
 	self:addComponent(dateAI:new({parent=self, target=self.game.player:getComponent("physics")}))
   
 end

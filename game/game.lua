@@ -97,7 +97,7 @@ function game:init()
   
   self.trainCars[1].ents = {
     {class = instructions, args={x=100, y=-200, text="Your lovely date is waiting on you. Dinner will be served.\nEventually.\nUse the arrow keys to move yourself already"}},
-	{class = date, args = {x=610, y=150, w=500, h=50}}
+	--{class = date, args = {x=610, y=150, w=500, h=50}}
   }
   
   self.trainCars[2].ents = {

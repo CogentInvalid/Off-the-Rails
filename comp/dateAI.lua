@@ -6,18 +6,19 @@ function dateAI:initialize(args)
   self.target = args.target
   self.phys = self.parent:getComponent("physics")
 	self.shotTimer = 0.05
-	
+	self.friendly = false
 	self.actions = {["shoot"]=2.2, ["jump"]=1, ["swap"]=1}
 	self.currentAction = lume.weightedchoice(self.actions)
 	self.actionTimer = 2
 	
 	self.side = 1
 	
+	self.hp = 5
+	
 	self.active = false
-	self.dodging = false
 	self.shooting = false
 	
-	self.dodgeTimer = 0
+	self.dodging = false
 	self.undodgeTimer = 0
 	
 	self[self.currentAction](self, true)
@@ -39,6 +40,11 @@ function dateAI:update(dt)
 		end
 	end
 	
+	self.undodgeTimer = self.undodgeTimer - dt
+	if self.undodgeTimer <= 0 then
+		self.dodging = false
+	end
+	
 	local r = 200; local g = 50; local b = 200
 	if self.dodging and not self.shooting then
 		r = 80; g = 40; b = 80
@@ -50,9 +56,19 @@ function dateAI:update(dt)
 		r = 80; g = 40; b = 40
 	end
 	local rect = self.parent:getComponent("rectangle")
-	rect.r = rect.r - (rect.r-r)*10*dt
-	rect.g = rect.g - (rect.g-g)*10*dt
-	rect.b = rect.b - (rect.b-b)*10*dt
+	rect.r = rect.r - (rect.r-r)*20*dt
+	rect.g = rect.g - (rect.g-g)*20*dt
+	rect.b = rect.b - (rect.b-b)*20*dt
+	
+	if self.dodging then
+		self.phys.inBackground = true
+		local rect = self.parent:getComponent("rectangle")
+		rect.drawLayer = "background"
+	else
+		self.phys.inBackground = false
+		local rect = self.parent:getComponent("rectangle")
+		rect.drawLayer = "default"
+	end
 	
 	self.phys:addVel(-(self.phys.vx)*3*dt, 0)
 end
@@ -125,16 +141,6 @@ function dateAI:dodge(start)
 		self.dodging = true
 	else
 	
-	if self.dodging then
-		self.phys.inBackground = true
-		local rect = self.parent:getComponent("rectangle")
-		local fadeSpeed = 20
-		rect.r = rect.r - (rect.r - 80)*fadeSpeed*dt
-		rect.g = rect.g - (rect.g - 40)*fadeSpeed*dt
-		rect.b = rect.b - (rect.b - 40)*fadeSpeed*dt
-		rect.drawLayer = "background"
-	end
-	
 	self.dodgeTimer = self.dodgeTimer - dt
 	if self.dodgeTimer <= 0 then
 		self.dodging = false
@@ -158,6 +164,32 @@ end
 
 function dateAI:distToPlayer()
 	return math.abs(self.phys.x - self.target.x)
+end
+
+function dateAI:collisionDetected(col)
+	local phys = self.parent:getComponent("physics")
+	if col.other.parent.id == "bullet" then
+		if col.other.parent.friendly ~= self.friendly and col.other.inBackground == phys.inBackground then
+			self.hp = self.hp - 1
+			self.dodging = true
+			self.undodgeTimer = 8
+			col.other.parent.die = true
+			audioManager:playAudio("bodyShotImpact")
+			
+			if self.hp <= 0 then
+				self.parent.die = true
+				local phys = col.other.parent:getComponent("physics")
+				local dir = 1
+				if phys.vx < 0 then dir = -1 end
+				
+				phys = self.parent:getComponent("physics")
+				local r = 100; local g = 50; local b = 50
+				if self.friendly then r = 50; g = 50; b = 100 end
+				local corpse = self.parent.game:addEnt(corpse, {x=phys.x-phys.w/2, y=phys.y+10, r=r, g=g, b=b})
+				corpse:getComponent("physics"):addVel(250*dir, -50)
+			end
+		end
+	end
 end
 
 
