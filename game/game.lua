@@ -258,9 +258,6 @@ function game:init()
     {class = date, args = {x=610, y=150, w=500, h=50}}
   }
   
-  
-  
-  
 	
 	self.levMan:startLevel()
   
