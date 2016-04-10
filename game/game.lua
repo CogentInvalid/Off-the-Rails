@@ -275,7 +275,9 @@ function game:init()
 	
 	self.won = false
   
+	audioManager:clearAudio()
   audioManager:setAudio("train")
+	audioManager:setAudio("bgm")  
 
 end
 

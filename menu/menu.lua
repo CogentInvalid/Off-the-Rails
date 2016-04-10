@@ -2,6 +2,7 @@ local menu = {}
 
 function menu:init()
 	self.duck = getImg("ducktective")
+	audioManager:setAudio("main")
 end
 
 function menu:enter()
@@ -23,7 +24,7 @@ function menu:draw()
 		w = love.graphics.getFont():getWidth("Press Enter")
 		love.graphics.print("Press Enter", love.mouse.getX()+math.sin(self.ang*2)*200-w/2, love.mouse.getY()+40, 0)
 		love.graphics.setColor(255,255,255)
-		love.graphics.draw(self.duck, love.mouse.getX(), love.mouse.getY()-800, 0, 0.2, 0.2)
+		love.graphics.draw(self.duck, love.mouse.getX()-20, love.mouse.getY()-800, 0, 0.2, 0.2)
 	end
 end
 
