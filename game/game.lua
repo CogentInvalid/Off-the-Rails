@@ -254,7 +254,7 @@ function game:init()
   
     self.trainCars[17].ents = {
     {class = instructions, args={x=100, y=-200, text="There she is!\n Your love!\n...Your FINAL love...", delay=1}},
-    {class = background, args = {img="ChairsAndTable", x=200, y=140, sx=0.5, sy=0.5}},
+    {class = background, args = {img="ChairsAndTable", x=200, y=60, sx=0.5, sy=0.5}},
     {class = date, args = {x=610, y=150, w=500, h=50}}
   }
   
@@ -295,8 +295,8 @@ function game:respawn()
 	
 	self.levMan = self:addSystem(levelManager)
 
-	self.levMan.carIndex =  currentCar
-	self.levMan.currentCar = currentCar
+	self.levMan.carIndex =  17--currentCar
+	self.levMan.currentCar = 17--currentCar
   
 	self.player = self:addEnt(player, {x=50, y=150}, true)
 	self.player:getComponent("platformerController").hasWeapon = true
