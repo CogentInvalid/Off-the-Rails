@@ -18,4 +18,5 @@ function bullet:initialize(args)
 	
 	self:addComponent(rect)
 	self:addComponent(phys)
+	self:addComponent(destroyOffscreen:new({parent=self}))
 end
