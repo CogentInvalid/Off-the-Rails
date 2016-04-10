@@ -84,6 +84,7 @@ function game:init()
   self.trainCars[9] = trainCar:new()
   self.trainCars[10] = trainCar:new()
   
+  
   self.trainCars[1].ents = {
     {class = instructions, args={x=100, y=-200, text="Your lovely date is waiting on you. Dinner will be served.\nEventually.\nUse the arrow keys to move yourself already"}}
   }
@@ -151,6 +152,8 @@ function game:init()
 	self.camMan.lockY = true
 	
 	self.deathTimer = 2
+  
+  audioManager:setAudio("train")
 
 end
 

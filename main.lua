@@ -8,6 +8,7 @@ gamestate = require "libs/hump/gamestate"
 
 --ehhhhh
 require "imgManager"
+require "audio"
 
 --gamestates
 gameMode = {}
@@ -25,6 +26,8 @@ function love.load()
 	love.graphics.setDefaultFilter("linear", "linear")
 
 	math.randomseed(os.time())
+  
+  audioManager = audio:new()
 	
 	--TODO remove
 	courierCodeBold = love.graphics.newFont("/res/font/CourierCode-bold.ttf", 20)
