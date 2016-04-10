@@ -90,6 +90,9 @@ function game:init()
   self.trainCars[11] = trainCar:new()
   self.trainCars[12] = trainCar:new()
   self.trainCars[13] = trainCar:new()
+  self.trainCars[14] = trainCar:new()
+  self.trainCars[15] = trainCar:new()
+  self.trainCars[16] = trainCar:new()
   
   
   self.trainCars[1].ents = {
@@ -171,7 +174,7 @@ function game:init()
 	self.trainCars[11].openCeiling = true
   
     self.trainCars[12].ents = {
-    {class = instructions, args={x=100, y=-200, text="Oh yeah", delay=1}},
+    {class = instructions, args={x=100, y=-200, text="Oh yeah.", delay=1}},
     {class = box, args={x=200, y=200}},
     {class = box, args={x=250, y=200}},
     {class = box, args={x=300, y=200}},
@@ -185,7 +188,7 @@ function game:init()
   }
 
     self.trainCars[13].ents = {
-    {class = instructions, args={x=100, y=-200, text="Oh yeah", delay=1}},
+    {class = instructions, args={x=100, y=-200, text="You are going to die.", delay=1}},
     {class = box, args={x=200, y=200}},
     {class = box, args={x=250, y=200}},
     {class = box, args={x=300, y=200}},
@@ -201,6 +204,61 @@ function game:init()
 		{class = enemySpawner, args={side=1, delay=4}}
   }
   
+    self.trainCars[14].ents = {
+    {class = instructions, args={x=100, y=-200, text="Food is getting cold. She is waiting.", delay=1}},
+    {class = box, args={x=200, y=-68}},
+    {class = box, args={x=200, y=-18}},
+    {class = box, args={x=200, y=32}},
+    {class = box, args={x=200, y=82}},
+    {class = box, args={x=200, y=132}},
+    {class = box, args={x=500, y=200}},
+    {class = box, args={x=550, y=200}},
+    {class = box, args={x=550, y=150}},
+    {class = box, args={x=550, y=32}},
+    {class = box, args={x=550, y=-18}},
+    {class = box, args={x=550, y=-68}},
+    {class = enemy, args = {x=400, y=150, w=500, h=50}},
+		{class = enemySpawner, args={side=0, delay=3}},
+    {class = enemy, args = {x=400, y=150, w=500, h=50}},
+    {class = enemy, args = {x=400, y=150, w=500, h=50}},
+		{class = enemySpawner, args={side=1, delay=2}},  
+  }
+  
+    self.trainCars[15].ents = {
+    {class = instructions, args={x=100, y=-200, text="Really? What are you doing?\nWhat are you thinking?\nWhy are you making up enemies?", delay=1}},
+    {class = box, args={x=100, y=40}},
+    {class = box, args={x=200, y=40}},
+    {class = box, args={x=300, y=40}},
+    {class = box, args={x=400, y=40}},
+    {class = box, args={x=500, y=40}},
+    {class = box, args={x=600, y=40}},
+    {class = box, args={x=700, y=40}},
+    {class = enemy, args = {x=100, y=-60, w=500, h=50}},
+    {class = enemy, args = {x=200, y=-60, w=500, h=50}},
+    {class = enemy, args = {x=300, y=-60, w=500, h=50}},
+    {class = enemy, args = {x=400, y=-60, w=500, h=50}},
+    {class = enemy, args = {x=500, y=-60, w=500, h=50}},
+    {class = enemy, args = {x=600, y=-60, w=500, h=50}},
+    {class = enemy, args = {x=700, y=-60, w=500, h=50}},
+  }
+  
+    self.trainCars[16].ents = {
+    {class = instructions, args={x=100, y=-200, text="What?", delay=1}},
+    {class = box, args={x=100, y=40}},
+    {class = box, args={x=200, y=40}},
+    {class = box, args={x=300, y=40}},
+    {class = box, args={x=400, y=40}},
+    {class = box, args={x=500, y=40}},
+    {class = box, args={x=600, y=40}},
+    {class = box, args={x=700, y=40}},
+    {class = enemy, args = {x=100, y=-60, w=500, h=50}},
+    {class = enemy, args = {x=200, y=-60, w=500, h=50}},
+    {class = enemy, args = {x=300, y=-60, w=500, h=50}},
+    {class = enemy, args = {x=400, y=-60, w=500, h=50}},
+    {class = enemy, args = {x=500, y=-60, w=500, h=50}},
+    {class = enemy, args = {x=600, y=-60, w=500, h=50}},
+    {class = enemy, args = {x=700, y=-60, w=500, h=50}},
+  }
   
 	
 	self.levMan:startLevel()
