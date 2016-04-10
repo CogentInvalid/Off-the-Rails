@@ -52,7 +52,7 @@ function Ai:shoot(start)
 	if self:targetVisible() then
 		self.shootTimer = self.shootTimer - dt
 		if self.shootTimer <= 0 then
-			self.shootTimer = 1.5
+			self.shootTimer = 1.2
 			if math.random(6) == 1 then self.shootTimer = 0.3 end
 			self:shootPlayer()
 		end
@@ -73,7 +73,7 @@ end
 function Ai:dodge(start)
 	if start then
 		self.actionTimer = math.random()*2+1.5
-		self.dodgeTimer = self.actionTimer - 1
+		self.dodgeTimer = self.actionTimer - 0.8
 		self.dodging = true
 	else
 	

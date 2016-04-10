@@ -100,8 +100,8 @@ function game:init()
   }
   
   self.trainCars[5].ents = {
-    {class = instructions, args={x=100, y=-200, text="See I told you...\nPress and hold Arrow Up to dodge QUICKLY!", delay=1.6}},
-	{class = enemySpawner, args={side=0, delay=1.6, shootSoon=true}}
+    {class = instructions, args={x=100, y=-200, text="See I told you...\nPress and hold Arrow Up to dodge QUICKLY!", delay=1.2}},
+	{class = enemySpawner, args={side=0, delay=1.2, shootSoon=true}}
   }
   
   self.trainCars[6].ents = {
