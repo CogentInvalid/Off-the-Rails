@@ -10,6 +10,7 @@ function player:initialize(args)
 	local x = args.x or 100
 	local y = args.y or 100
 	local phys = physics:new({parent=self, x=x, y=y, w=50, h=100, gravity=true})
+	phys.collideOrder = {physics.isSolid, physics.isStatic, physics.thirdThing}
 
 	local rect = rectangle:new({parent=self, w=50, h=100, posParent=phys, r=100, g=100, b=200, drawLayer="player"})
 	

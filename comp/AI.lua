@@ -44,7 +44,7 @@ function Ai:activate()
 end
 
 function Ai:shoot(start)
-	if start then self.actionTimer = 2 end
+	if start then self.actionTimer = 2 else
 	if self:targetVisible() then
 		self.shootTimer = self.shootTimer - dt
 		if self.shootTimer <= 0 then
@@ -53,23 +53,25 @@ function Ai:shoot(start)
 			self:shootPlayer()
 		end
 	end
+	end
 end
 
 function Ai:walkForward(start)
-	if start then self.actionTimer = math.random()+1.5 end
+	if start then self.actionTimer = math.random()+1.5 else
 	if self:targetVisible() and self:distToPlayer() > 150 then
 		local dir = 1
 		if self.phys.x > self.target.x then dir = -1 end
 		self.phys:addVel(-(self.phys.vx-(150*dir))*5*dt, 0)
 	end
+	end
 end
 
 function Ai:dodge(start)
 	if start then
-		self.actionTimer = math.random()*3+2 --TODO randomize
+		self.actionTimer = math.random()*3+2
 		self.dodgeTimer = self.actionTimer - 1
 		self.dodging = true
-	end
+	else
 	
 	if self.dodging then
 		self.phys.inBackground = true
@@ -84,6 +86,7 @@ function Ai:dodge(start)
 	self.dodgeTimer = self.dodgeTimer - dt
 	if self.dodgeTimer <= 0 then
 		self.dodging = false
+	end
 	end
 end
 

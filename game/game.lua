@@ -10,12 +10,14 @@ require "comp/component"
 
 require "ent/player"
 require "ent/wall"
+require "ent/playerWall"
 require "ent/enemy"
 require "ent/bullet"
 require "ent/instructions"
 require "ent/weapon"
 require "ent/corpse"
 require "ent/trigger"
+require "ent/enemySpawner"
 
 require "comp/image"
 require "comp/rectangle"
@@ -27,6 +29,7 @@ require "comp/person"
 require "comp/AI"
 require "comp/cameraTrigger"
 require "comp/trainCarTrigger"
+require "comp/wallTrigger"
 
 local game = {}
 
@@ -92,16 +95,17 @@ function game:init()
   
   self.trainCars[4].ents = {
     {class = instructions, args={x=100, y=-200, text="They are coming after you."}},
-    {class = enemy, args = {x=600, y=50, w=500, h=50}}
+    {class = enemy, args = {x=600, y=50, w=500, h=50}},
   }
   
   self.trainCars[5].ents = {
-    {class = instructions, args={x=100, y=-200, text="See I told you...\nPress and hold Arrow Up to dodge QUICKLY!", delay=3}}
+    {class = instructions, args={x=100, y=-200, text="See I told you...\nPress and hold Arrow Up to dodge QUICKLY!", delay=1.8}},
+	{class = enemySpawner, args={side=0, delay=1.8}}
   }
   
   self.trainCars[6].ents = {
     {class = instructions, args={x=100, y=-200, text="There are a few losers here.\nDeal with them."}},
-    {class = enemy, args = {x=600, y=50, w=500, h=50}}, {class = enemy, args = {x=600, y=50, w=500, h=50}}, {class = enemy, args = {x=500, y=50, w=500, h=50}}
+    {class = enemy, args = {x=600, y=50, w=500, h=50}}, {class = enemy, args = {x=540, y=50, w=500, h=50}}, {class = enemy, args = {x=480, y=50, w=500, h=50}}
   }
   
   self.trainCars[7].ents = {
@@ -286,7 +290,11 @@ function game:addEnt(ent, args, permanent)
 	args.game = self
 	local entity = ent:new(args)
 	self.ent[#self.ent+1] = entity
-	if not permanent then self.levMan:addToCarX(self.levMan.loadedCar, entity) end
+	if not permanent then
+		if self.levMan.loadedCar ~= nil then
+			self.levMan:addToCarX(self.levMan.loadedCar, entity)
+		end
+	end
 	return entity
 end
 

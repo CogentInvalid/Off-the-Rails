@@ -22,6 +22,7 @@ function physics:initialize(args)
 	self.friction = args.friction
 	
 	self.solidity = args.solidity
+	self.playerSolid = args.playerSolid
 	self.inBackground = false
 
 	self.col = args.col --does this collide with other objects?
@@ -42,6 +43,10 @@ end
 --ADDITIONAL UNFINISHED FUNCTION
 function physics.isStatic(other)
 	return other.solidity == "static"
+end
+
+function physics.thirdThing(other)
+	return other.playerSolid
 end
 
 function physics:update(dt)

@@ -43,6 +43,11 @@ function levelManager:loadTrainCar()
 	camTrigger:addComponent(cameraTrigger:new({parent=camTrigger, camx=self.rightSide+400, camy=0}))
 	camTrigger:addComponent(trainCarTrigger:new({parent=camTrigger, car=self.cars[i], index = self.carIndex}))
 	
+	--wall trigger
+	local wTrigger = self.parent:addEnt(trigger, {x=self.rightSide+70, y=50, w=200, h=200}, true) --trigger
+	self:addToCar(i, wTrigger)
+	wTrigger:addComponent(wallTrigger:new({parent=wTrigger, x=self.rightSide, y=0}))
+	
 	--load trainCar
 	local trainCar = self.parent.trainCars[self.carIndex]
 	for q, entity in ipairs(trainCar.ents) do
