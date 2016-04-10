@@ -18,7 +18,7 @@ function destroyOffscreen:update(dt)
 end
 
 function destroyOffscreen:collisionDetected(col)
-	if col.other.parent.id == "box" then
+	if col.other.parent.id == "box" or col.other.parent.id == "wall" then
 		self.parent.die = true
 	end
 end
