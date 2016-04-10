@@ -22,6 +22,9 @@ function levelManager:loadTrainCar()
 	local i = #self.cars+1
 	self.cars[i] = {}
 	
+	--background
+	self:addToCar(i, self.parent:addEnt(background, {x=self.rightSide-110, y=-330, img="trainCar", sx=0.4, sy=0.5}, true))
+	
 	--load walls into self.cars[i]
 	self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide, y=250, w=800, h=20}, true)) --floor
 	self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide, y=250, w=800, h=20}, true)) --floor

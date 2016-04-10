@@ -6,7 +6,7 @@ function wall:initialize(args)
 	
 	local phys = physics:new({parent=self, x=args.x, y=args.y, w=args.w, h=args.h, col=false, solidity="static"})
 	
-	local rect = rectangle:new({parent=self, w=args.w, h=args.h, posParent=phys})
+	local rect = rectangle:new({parent=self, w=args.w, h=args.h, posParent=phys, a=0})
 	
 	self:addComponent(rect)
 	self:addComponent(phys)

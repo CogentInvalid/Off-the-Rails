@@ -12,7 +12,9 @@ function player:initialize(args)
 	local phys = physics:new({parent=self, x=x, y=y, w=50, h=100, gravity=true})
 	phys.collideOrder = {physics.isSolid, physics.isStatic, physics.thirdThing}
 
-	local rect = rectangle:new({parent=self, w=50, h=100, posParent=phys, r=100, g=100, b=200, drawLayer="player"})
+	local rect = rectangle:new({parent=self, w=50, h=100, posParent=phys, r=100, g=100, b=200, drawLayer="player", name="hitbox"})
+	local reload = rectangle:new({parent=self, w=50, h=10, posParent=phys, oy=-30, r=255, g=255, b=255, drawLayer="player", name="reloadBar"})
+	self:addComponent(reload)
 	
 	local controller = platformerController:new({parent=self})
 	

@@ -15,6 +15,8 @@ function image:initialize(args)
 	self.x = args.x or 100; self.y = args.y or 100 --position on screen
 	self.ox = args.ox or 0; self.oy = args.oy or 0 --offset
 	
+	self.sx = args.sx or 1; self.sy = args.sy or 1
+	
 	if args.posParent then --a parent component to follow
 		self:setPosParent(args.posParent, self.ox, self.oy)
 	end
@@ -61,7 +63,7 @@ function image:draw()
 	end
 	
 	love.graphics.setColor(self.r, self.g, self.b)
-	love.graphics.draw(self.img, self.x+self.ox, self.y+self.oy)
+	love.graphics.draw(self.img, self.x+self.ox, self.y+self.oy, 0, self.sx, self.sy)
 end
 
 --UNFINISHED

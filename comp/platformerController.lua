@@ -17,6 +17,8 @@ function platformerController:initialize(args)
 	
 	self.shootCooldown = 0
 	
+	self.reloadBar = self.parent:getComponentByName("reloadBar")
+	
 	self.phys = self.parent:getComponent("physics")
 end
 
@@ -56,14 +58,14 @@ function platformerController:update(dt)
 		self.ducking = true
 		phys:setDimensions(phys.w, 60)
 		phys:addPos(0, 40)
-		local rect = self.parent:getComponent("rectangle")
+		local rect = self.parent:getComponentByName("hitbox")
 		rect.w = phys.w; rect.h = phys.h
 	end
 	if (not input:keyDown("duck")) and self.ducking then
 		self.ducking = false
 		phys:setDimensions(phys.w, 100)
 		phys:addPos(0, -phys.h/2)
-		local rect = self.parent:getComponent("rectangle")
+		local rect = self.parent:getComponentByName("hitbox")
 		rect.w = phys.w; rect.h = phys.h
 	end
 	
@@ -71,7 +73,7 @@ function platformerController:update(dt)
 	local fadeSpeed = 20
 	if input:keyDown("dodge") and self.canDodge then
 		phys.inBackground = true
-		local rect = self.parent:getComponent("rectangle")
+		local rect = self.parent:getComponentByName("hitbox")
 		rect.r = rect.r - (rect.r - 40)*fadeSpeed*dt
 		rect.g = rect.g - (rect.g - 40)*fadeSpeed*dt
 		rect.b = rect.b - (rect.b - 80)*fadeSpeed*dt
@@ -82,7 +84,7 @@ function platformerController:update(dt)
 		end
 	else
 		phys.inBackground = false
-		local rect = self.parent:getComponent("rectangle")
+		local rect = self.parent:getComponentByName("hitbox")
 		rect.r = rect.r - (rect.r - 100)*fadeSpeed*dt
 		rect.g = rect.g - (rect.g - 100)*fadeSpeed*dt
 		rect.b = rect.b - (rect.b - 200)*fadeSpeed*dt
@@ -100,7 +102,12 @@ function platformerController:update(dt)
 	
 	--shoot cooldown
 	if self.shootCooldown > 0 then
+		self.reloadBar.a = 255
 		self.shootCooldown = self.shootCooldown - dt
+		self.reloadBar.w = 50-(self.shootCooldown*50)
+	else
+		self.reloadBar.w = 50
+		self.reloadBar.a = self.reloadBar.a - (self.reloadBar.a)*10*dt
 	end
 	
 end

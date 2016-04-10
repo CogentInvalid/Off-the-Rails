@@ -18,6 +18,7 @@ require "ent/weapon"
 require "ent/corpse"
 require "ent/trigger"
 require "ent/enemySpawner"
+require "ent/background"
 
 require "comp/image"
 require "comp/rectangle"
@@ -40,7 +41,7 @@ function game:init()
 	accum = 0
 	self.paused = false
 	
-	self.drawLayers = {"background", "default", "player"}
+	self.drawLayers = {"actualBackground", "background", "default", "player"}
   
 	self.bg_sky_image = love.graphics.newImage("res/img/nightSky.jpg")
 	self.bgX1 = 0
