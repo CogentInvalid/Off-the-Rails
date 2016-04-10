@@ -122,7 +122,7 @@ function platformerController:jump()
 end
 
 function platformerController:shoot()
-	if self.shootCooldown <= 0 and self.hasWeapon then
+	if self.shootCooldown <= 0 and self.hasWeapon and self.phys ~= nil then
 		self.parent.game:addEnt(bullet, {x=self.phys.x+self.phys.w/2, y=self.phys.y+self.phys.h/2-10, vx=self.dir, friendly=true})
 		self.parent.game.camMan.screenshake = 0.2
 		self.shootCooldown = 1.2
