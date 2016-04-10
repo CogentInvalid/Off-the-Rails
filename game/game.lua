@@ -98,7 +98,7 @@ function game:init()
   
   self.trainCars[1].ents = {
     {class = instructions, args={x=100, y=-200, text="Your lovely date is waiting on you. Dinner will be served.\nEventually.\nUse the arrow keys to move yourself already"}},
-	{class = date, args = {x=610, y=150, w=500, h=50}}
+	--{class = date, args = {x=610, y=150, w=500, h=50}}
   }
   
   self.trainCars[2].ents = {
@@ -295,8 +295,8 @@ function game:respawn()
 	
 	self.levMan = self:addSystem(levelManager)
 
-	self.levMan.carIndex =  16--currentCar
-	self.levMan.currentCar = 16--currentCar
+	self.levMan.carIndex =  17--currentCar
+	self.levMan.currentCar = 17--currentCar
   
 	self.player = self:addEnt(player, {x=50, y=150}, true)
 	self.player:getComponent("platformerController").hasWeapon = true
