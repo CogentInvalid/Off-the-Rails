@@ -126,6 +126,7 @@ function platformerController:shoot()
 		self.parent.game:addEnt(bullet, {x=self.phys.x+self.phys.w/2, y=self.phys.y+self.phys.h/2-10, vx=self.dir, friendly=true})
 		self.parent.game.camMan.screenshake = 0.2
 		self.shootCooldown = 1.2
+    audioManager:setAudio("gunShot")
 	end
 end
 
@@ -143,5 +144,6 @@ function platformerController:collisionDetected(col)
 	if col.other.parent.id == "weapon" then
 		self.hasWeapon = true
 		col.other.parent.die = true
+    --audioManager.
 	end
 end
