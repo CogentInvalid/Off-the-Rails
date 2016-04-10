@@ -47,6 +47,11 @@ function image:setOffset(x, y)
 	self.ox = x; self.oy = y
 end
 
+function image:offset(args)
+	self.x = self.x + args.x
+	self.y = self.y + args.y
+end
+
 --set another component as this image's parent, so that it'll automatically match its position onscreen
 function image:setPosParent(parent, ox, oy)
 	self.posParent = parent
