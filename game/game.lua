@@ -295,8 +295,8 @@ function game:respawn()
 	
 	self.levMan = self:addSystem(levelManager)
 
-	self.levMan.carIndex =  17--currentCar
-	self.levMan.currentCar = 17--currentCar
+	self.levMan.carIndex =  currentCar
+	self.levMan.currentCar = currentCar
   
 	self.player = self:addEnt(player, {x=50, y=150}, true)
 	self.player:getComponent("platformerController").hasWeapon = true
