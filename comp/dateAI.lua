@@ -180,6 +180,7 @@ function dateAI:collisionDetected(col)
 				self.parent.die = true
 				local phys = col.other.parent:getComponent("physics")
 				local dir = 1
+        audioManager:playAudio("dateAfterDeathCry")
 				if phys.vx < 0 then dir = -1 end
 				
 				phys = self.parent:getComponent("physics")
