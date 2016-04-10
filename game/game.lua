@@ -41,15 +41,15 @@ function game:init()
   
 	self.bg_sky_image = love.graphics.newImage("res/img/nightSky.jpg")
 	self.bgX1 = 0
-	self.bgY1 = 0
+	self.bgY1 = -105
 	self.bgX2 = 2560/2
-	self.bgY2 = 0
+	self.bgY2 = -105
   
   self.bg_ground_image = love.graphics.newImage("res/img/groundBackground.png")
 	self.bggX1 = 0
-	self.bggY1 = 0
-	self.bggX2 = 2560/2
-	self.bggY2 = 0
+	self.bggY1 = -730
+	self.bggX2 = 2560
+	self.bggY2 = -730
 
 	--systems
 	self.system = {}
@@ -86,7 +86,7 @@ function game:init()
   }
   
   self.trainCars[3].ents = {
-    {class = instructions, args={x=100, y=-200, text="Kill it. Kill it.\nIt can't stay between you and your date.\nPress X to kill"}},
+    {class = instructions, args={x=100, y=-200, text="Kill it. Kill it.\nIt can't stand between you and your date.\nPress X to kill"}},
     {class = enemy, args = {x=600, y=50, w=500, h=50}}
   }
   
@@ -173,9 +173,9 @@ function game:update(delta)
 		if self.bgX2 < -2560/2 then self.bgX2 = self.bgX2 + 2560 end
 		
 		self.bggX1 = self.bggX1 - 200*dt
-		if self.bggX1 < -2560/2 then self.bggX1 = self.bggX1 + 2560 end
+		if self.bggX1 < -2560 then self.bggX1 = self.bggX1 + 2560*2 end
 		self.bggX2 = self.bggX2 - 200*dt
-		if self.bggX2 < -2560/2 then self.bggX2 = self.bggX2 + 2560 end
+		if self.bggX2 < -2560 then self.bggX2 = self.bggX2 + 2560*2 end
 
 		--reverse iterate entities
 		for i, entity in lume.ripairs(self.ent) do
@@ -213,8 +213,8 @@ function game:draw()
   love.graphics.draw(self.bg_sky_image, self.bgX1, self.bgY1, 0, 0.5, 0.5)
 	love.graphics.draw(self.bg_sky_image, self.bgX2, self.bgY2, 0, 0.5, 0.5) 
   
-  love.graphics.draw(self.bg_ground_image, self.bggX1, self.bggY1, 0, 0.5, 0.5)
-	love.graphics.draw(self.bg_ground_image, self.bggX2, self.bggY2, 0, 0.5, 0.5) 
+  love.graphics.draw(self.bg_ground_image, self.bggX1, self.bggY1, 0)
+	love.graphics.draw(self.bg_ground_image, self.bggX2, self.bggY2, 0) 
   
 	--attach camera
 	self.camMan.cam:attach()

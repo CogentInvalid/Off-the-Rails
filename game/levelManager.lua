@@ -33,6 +33,10 @@ function levelManager:loadTrainCar()
 		self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide+800+x*10+1, y=250, w=8, h=10}, true)) --floor
 	end
 	
+	for x=0, 9 do
+		self:addToCar(i, self.parent:addEnt(wall, {x=self.rightSide-100+x*10+1, y=250, w=8, h=10}, true)) --floor
+	end
+	
 	--load trigger
 	local camTrigger = self.parent:addEnt(trigger, {x=self.rightSide, y=50, w=200, h=200}, true) --trigger
 	self:addToCar(i, camTrigger)
